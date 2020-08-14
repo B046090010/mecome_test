@@ -70,7 +70,7 @@
           <span>Menu</span>
         </a>
         <div id="collapseMenu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="index.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
           </a>
