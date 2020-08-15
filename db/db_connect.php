@@ -11,7 +11,7 @@ if(!$db){
 	echo 'console.log("connect fail")';
 	echo '</script>';
 } else {
-	//echo "Opened database successfully\n";
+	echo "Opened database successfully\n";
 }
 
 function Total($start,$end,$main,$middle,$detail,$area,$country,$town){
