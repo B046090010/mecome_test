@@ -8,10 +8,10 @@ $credentials = "user=postgres password=asshole425012";
 $db = pg_connect( "$host $port $dbname $credentials"  );
 if(!$db){
 	echo '<script type="text/javascript">';
-	echo 'console.log("connect fail")';
+	echo 'console.log("No!connect fail")';
 	echo '</script>';
 } else {
-	echo "Opened database successfully\n";
+	//echo "Opened database successfully\n";
 }
 
 function Total($start,$end,$main,$middle,$detail,$area,$country,$town){
