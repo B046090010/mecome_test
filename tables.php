@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Tables</title>
+  <title>Mecome - Tables</title>
 
   <!-- Custom fonts for this template -->
   <link href="vendor1/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -20,6 +20,8 @@
 
   <!-- Custom styles for this page -->
   <link href="vendor1/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
 </head>
 
@@ -29,6 +31,8 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
+    <form>
+    <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
@@ -36,110 +40,219 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">Mecome </div>
       </a>
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item">
-        <a class="nav-link" href="index.html">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Interface
-      </div>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Components</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Utilities</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Addons
-      </div>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
-      </li>
-
-      <!-- Nav Item - Tables -->
       <li class="nav-item active">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMenu" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-clipboard-list" aria-hidden="true"></i>
+          <span>Menu</span>
+        </a>
+        <div id="collapseMenu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <a class="nav-link" href="index.php">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+          </a>
+        </div>
       </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Time
+      </div>
+
+      <!-- Nav Item - time Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStart" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <span>Duration</span>
+        </a>
+
+        <div id="collapseStart" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <input type='text' class="form-control" id='datepicker' placeholder="start"/>
+            <div class="span text-center text-white" >To</div>
+            <input type='text' class="form-control" id='datepickere' placeholder="end"/>
+        </div>
+      </li>
+      <!-- Nav Item - store Collapse Menu -->
+
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Store
+      </div>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseArea" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+          <span>Area</span>
+        </a>
+        
+        <div id="collapseArea" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <select id ="sarea" class="selectpicker form-control" data-live-search="true">
+            <option data-tokens="">-</option>
+            <option data-tokens="">不分區</option>
+            <option data-tokens="">三大區</option>
+            <option data-tokens="">三重區</option>
+            <option data-tokens="">中和區</option>
+            <option data-tokens="">中壢區</option>
+            <option data-tokens="">二安區</option>
+            <option data-tokens="">佳恩區</option>
+            <option data-tokens="">利民區</option>
+            <option data-tokens="">加棟區</option>
+            <option data-tokens="">南雅區</option>
+            <option data-tokens="">台安區</option>
+            <option data-tokens="">台灣區</option>
+            <option data-tokens="">善耕區</option>
+            <option data-tokens="">城康區</option>
+            <option data-tokens="">大慶區</option>
+            <option data-tokens="">家音區</option>
+            <option data-tokens="">富國區</option>
+            <option data-tokens="">延吉區</option>
+            <option data-tokens="">悅康區</option>
+            <option data-tokens="">新康區</option>
+            <option data-tokens="">新杏區</option>
+            <option data-tokens="">新竹區</option>
+            <option data-tokens="">林口區</option>
+            <option data-tokens="">桃園區</option>
+            <option data-tokens="">桃康區</option>
+            <option data-tokens="">正康區</option>
+            <option data-tokens="">蘆洲區</option>
+            <option data-tokens="">逢甲區</option>
+            <option data-tokens="">閎安區</option>
+            <option data-tokens="">鶯康區</option>
+            <option data-tokens="">一安一區</option>
+            <option data-tokens="">一安二區</option>
+            <option data-tokens="">北市二區</option>
+            <option data-tokens="">新莊一區</option>
+            <option data-tokens="">新莊二區</option>
+            <option data-tokens="">一安政昇區</option>
+            <option data-tokens="">輔大美康區</option>
+            <option data-tokens="">N/A</option>
+          </select>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCountry" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+          <span>Country</span>
+        </a>
+        <div id="collapseCountry" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <select id ="scountry" class="selectpicker form-control" data-live-search="true">
+              <option data-tokens="">-</option>
+              <option data-tokens="台">台北市</option>
+              <option data-tokens="新">新北市</option>
+              <option data-tokens="桃">桃園市</option>
+              <option data-tokens="新">新竹市</option>
+              <option data-tokens="新">新竹縣</option>
+              <option data-tokens="苗">苗栗縣</option>
+              <option data-tokens="台">台中市</option>
+              <option data-tokens="彰">彰化縣</option>
+              <option data-tokens="南">南投縣</option>
+              <option data-tokens="雲">雲林市</option>
+              <option data-tokens="嘉">嘉義市</option>
+              <option data-tokens="台">台南市</option>
+              <option data-tokens="高">高雄市</option>
+              <option data-tokens="屏">屏東縣</option>
+            </select>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTown" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+          <span>Town</span>
+        </a>
+        <div id="collapseTown" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <select id ="stown" class="selectpicker form-control" data-live-search="true">
+              <option data-tokens="">-</option>   
+            </select>
+        </div>
+      </li>
+      <!-- Nav Item - product Collapse Menu -->
+
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Product
+      </div>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMain" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fa fa-sitemap" aria-hidden="true"></i>
+          <span>Main</span>
+        </a>
+        <div id="collapseMain" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <select id ="smain" class="selectpicker form-control" data-live-search="true">
+              <option data-tokens="">-</option>
+              <option data-tokens="中">中藥</option>
+              <option data-tokens="美">美清</option>
+              <option data-tokens="婦">婦嬰</option>
+              <option data-tokens="食">食品</option>
+              <option data-tokens="藥">藥品</option>
+              <option data-tokens="日">日用百貨</option>
+              <option data-tokens="保">保健食品</option>
+              <option data-tokens="醫">醫療器材</option>
+              <option data-tokens="奶">奶粉尿褲</option>
+              <option data-tokens="其">其他</option>
+              <option data-tokens="">N/A</option>
+            </select>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMiddle" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fa fa-sitemap" aria-hidden="true"></i>
+          <span>Middle</span>
+          
+        </a>
+        <div id="collapseMiddle" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <select id="smiddle" class="selectpicker form-control" data-live-search="true">
+            <option data-tokens="">-</option>
+          </select>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDetail" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fa fa-sitemap" aria-hidden="true"></i>
+          <span>Detail</span>
+        </a>
+        <div id="collapseDetail" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <select id ="sdetail" class="selectpicker form-control" data-live-search="true">
+              <option data-tokens="">-</option>
+              
+            </select>
+        </div>
+      </li>
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Search,Refresh -->
+      <button id="send" type="button" class="btn btn-icon-split" >
+        <span class="icon text-white-50">
+          <i class="fas fa-arrow-right"></i>
+        </span>
+      </button>
+      <p></p>
+
+    
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
-      <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
+
 
     </ul>
+    </form>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
