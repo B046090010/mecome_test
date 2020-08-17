@@ -608,7 +608,25 @@
                 </div>
                 
                 <!-- Card Body -->
-
+                <div class="card-body">
+                  <div id="chartjs-tooltip" 
+                    style="left: 0;bottom: 0;
+                      font-family:  Arial, sans-serif;
+                      font-style: normal;
+                      right: 0;
+                      display: flex;
+                      justify-content: center;
+                      position: absolute;
+                      z-index: 0;
+                      height: 90%;
+                      padding: 0;
+                      opacity: 1 !important;
+                      align-items: center;
+                      color: gray;
+                      font-size: 40px !important;
+                      font-weight: 800 !important;">
+                    <div><p>100%</p></div>
+                  </div>
                   <div class="chart-pie pt-4 pb-2">
                     <canvas id="myPieChart"></canvas>
                     
