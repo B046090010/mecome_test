@@ -440,7 +440,7 @@
                         </optgroup>
                         <optgroup label="Location">
                             <option>Area</option>
-                            <option>County</option>
+                            <option>Country</option>
                             <option>Town</option>
                         </optgroup>
                         <optgroup label="Product">
