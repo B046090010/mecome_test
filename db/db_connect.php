@@ -52,6 +52,28 @@ function input($get){
 	}
 	return $output;
 }
+function Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$group,$order,$limit){
+	global $db;
+	$temp_select=explode(",", $select);
+	$query='SELECT sum("Total_Sales") as s,sum("Total_Profit") as p,sum("Total_Quantity") as q
+	FROM "Sales_Total" as ST inner join 
+		"Dim_Product" as DP on ST."Product Key"=DP."Product Key" inner join
+		"Dim_Store" as DS on ST."Store Key"= DS."Store Key"
+	Where ST."Sales Date Key" between '.$start.' AND '. $end.' 
+      and DP."Main Category" '.$main.' AND DP."Middle Category" '.$middle.' AND DP."Detail Category" '.$detail.' AND 
+	  DS."Area" '.$area.' AND DS."Country" '.$country.' AND DS."Town" '.$town.
+	  '	GROUP BY "'.$group.'" 
+	  ORDER BY "'.$order.'"
+	   LIMIT '.$limit;
+	if($result = pg_query($db, $query)){
+		$rows = pg_fetch_all($result);
+		return $rows;
+	}
+	else{
+		echo pg_last_error($db);
+		exit;
+	}
+}
 //'SELECT COUNT(*) FROM (SELECT DISTINCT LEFT("_SourceSales",25) FROM "Fact_Sales" WHERE "Date" Between $1 AND $2) AS temp'
 
 //pg_close($db);
