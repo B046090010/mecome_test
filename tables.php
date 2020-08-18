@@ -20,8 +20,11 @@
 
   <!-- Custom styles for this page -->
   <link href="vendor1/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <!-- other resource -->
+
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
 
 </head>
 
@@ -233,9 +236,10 @@
         </div>
       </li>
       <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
 
-      <!-- Search,Refresh -->
+      <hr class="sidebar-divider d-none d-md-block">
+      <!-- search -->
+
       <button id="send" type="button" class="btn btn-icon-split" >
         <span class="icon text-white-50">
           <i class="fas fa-arrow-right"></i>
@@ -453,7 +457,43 @@
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+          <!-- Select option -->
+
+          <div class ="row">
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Group</div>
+                                <select id ="sarea" class="selectpicker form-control" data-live-search="true">
+                                    <option data-tokens="">-</option>
+                                    <option data-tokens="">不分區</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Sub-issue Group</div>
+                      <select id ="sarea" class="selectpicker form-control" data-live-search="true">
+                        <option data-tokens="">-</option>
+                        <option data-tokens="">不分區</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+         </div>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -1011,7 +1051,6 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-
 
 </body>
 
