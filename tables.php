@@ -477,7 +477,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Limit</div>
-                      <select id ="sarea" class="selectpicker form-control">
+                      <select id ="limit" class="selectpicker form-control">
                         <option data-tokens="">First 100 rows</option>
                         <option data-tokens="">Last 100 rows</option>
                         <option data-tokens="">All rows</option>
