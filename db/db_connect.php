@@ -73,7 +73,7 @@ function Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$
 	elseif ($group!="Product Name")
 	   $group='"'.$group.'"';
 
-	$temp_select='SELECT '.$group.' AS item,';
+	$temp_select='SELECT '.$group.' AS "Name",';
 
 	if ($group=="Product Name"){
 	   $group='DP."Product Key"';
@@ -85,14 +85,14 @@ function Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$
 
 	foreach($select as $opt){
 	   if ($opt=="Profit")
-		  $opt = 'SUM("Total_Profit") as p,';
+		  $opt = 'ROUND(SUM("Total_Profit")) as "Profit",';
 	   else if ($opt == "Sales Amount")
-		  $opt = 'SUM("Total_Sales") as s,';
+		  $opt = 'ROUND(SUM("Total_Sales")) as "Sales Amount",';
 	   else if ($opt == "Quantity")
-		  $opt = 'SUM("Total_Quantity") as q,';
+		  $opt = 'ROUND(SUM("Total_Quantity")) as "Quantity",';
 	   else{
 		  //$opt=preg_split('/\(|\)/', $value)[1];
-		  $opt ='(SUM("Total_Profit") / SUM(SUM("Total_Profit")) OVER ()) AS "Percentage",';
+		  $opt ='ROUND((SUM("Total_Profit") / SUM(SUM("Total_Profit")) OVER ()),4) AS "Profit(%)",';
 		  // echo $opt;
 		  // unset($opt);
 	   }
@@ -102,12 +102,8 @@ function Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$
 
 
 	//order
-	if ($order == "Profit")
-	   $order='p';
-	elseif ($order == "Sales Amount")
-	   $order='s';
-	else
-	   $order='q';
+	$order='"'.$order.'"';
+
 	//limit
 	if ($limit == "First 100 rows")
 	   $limit=' DESC LIMIT 100';
@@ -119,14 +115,16 @@ function Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$
 
 	//query
 	$query=$temp_select.$from_where.' GROUP BY '.$group.' ORDER BY '.$order.$limit;
+	// echo $query;
 	//result
 	if($result = pg_query($db, $query)){
 	   $data= pg_fetch_all($result);
 	   return $data;
 	}
 	else{
-	   echo pg_last_error($db);
-	   exit;
+		return false;
+	   //echo pg_last_error($db);
+	   //exit;
 	}
 	
  }

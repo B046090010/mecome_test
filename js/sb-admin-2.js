@@ -122,7 +122,8 @@
     var val = $(this).val();
     var temp="<option>-</option>";
     for(var i in val){
-      temp=temp+"<option>"+val[i]+"</option>";
+      if (val[i]!="Percentage(Profit)")
+        temp=temp+"<option>"+val[i]+"</option>";
     }
     $("#order").html(temp);
     $('#order').selectpicker('refresh');
@@ -153,7 +154,6 @@
       order=$("#order").val();
       limit=$("#limit").val();
       select=$("#select").val().join();
-      console.log(select);
       document.location.href= "tables.php?start="+start+"&end="+end+
       "&area="+sarea+"&country="+scountry+"&town="+stown+
       "&main="+smain+"&middle="+smiddle+"&detail="+sdetail+
