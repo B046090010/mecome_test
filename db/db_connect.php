@@ -38,6 +38,8 @@ function Total($start,$end,$main,$middle,$detail,$area,$country,$town){
 	   return $row;
 	}
 	else{
+	   
+	   return false;
 	   echo pg_last_error($db);
 	   exit;
 	}

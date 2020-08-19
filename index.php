@@ -5,11 +5,10 @@
     if($_GET['start']!=NULL && ($_GET['end']!=NaN))
       $_SESSION['start']=$_GET["start"];
     else 
-      $_SESSION['start']=20200101;
+      echo'<script>alert("Please select duration")</script>';
     if($_GET['end']!=NULL && ($_GET['end']!=NaN))
       $_SESSION['end']=$_GET["end"];
-    else 
-      $_SESSION['end']=20200630;
+
     $_SESSION['main']=input($_GET['main']);
     $_SESSION['middle']=input($_GET['middle']);
     $_SESSION['detail']=input($_GET['detail']);
@@ -18,6 +17,14 @@
     $_SESSION['town']=input($_GET['town']);
     $total=Total($_SESSION['start'],$_SESSION['end'],$_SESSION['main'],$_SESSION['middle'],$_SESSION['detail'],$_SESSION['area'],$_SESSION['country'],$_SESSION['town']);
     $gross=($total['p']/$total['s'])*100;
+    if ($_SESSION['detail'] != 'IS NOT NULL')
+      $group="Product Name";
+    elseif ($_SESSION['middle'] != 'IS NOT NULL')
+      $group="Detail Category";
+    elseif ($_SESSION['main'] != 'IS NOT NULL')
+      $group="Middle Category";
+    else
+      $group="Main Category";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,6 +79,10 @@
           <a class="nav-link" href="index.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
+          </a>
+          <a class="nav-link" href="tables.php">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Tables</span>
           </a>
         </div>
       </li>
@@ -513,11 +524,13 @@
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
+                      <div class="dropdown-header">Other format</div>
+                      <?php
+                        echo'<a class="dropdown-item" href="tables.php?start='.$_SESSION['start'].'&end='.$_SESSION['end'].
+                        '&area='.$_GET['area']."&country=".$_GET['country']."&town=".$_GET['town'].
+                        "&main=".$_GET['main']."&middle=".$_GET['middle']."&detail=".$_GET['detail'].
+                        '&select=Profit&group=Month&order=Profit&limit=All rows" target="_blank">Shown in Table</a>';
+                      ?>
                     </div>
                   </div>
                 </div>
@@ -541,11 +554,13 @@
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
+                      <div class="dropdown-header">Other format</div>
+                      <?php
+                        echo'<a class="dropdown-item" href="tables.php?start='.$_SESSION['start'].'&end='.$_SESSION['end'].
+                        '&area='.$_GET['area']."&country=".$_GET['country']."&town=".$_GET['town'].
+                        "&main=".$_GET['main']."&middle=".$_GET['middle']."&detail=".$_GET['detail'].
+                        '&select=Profit,Percentage(Profit)&group='.$group.'&order=Profit&limit=All rows" target="_blank">Shown in Table</a>';
+                      ?>
                     </div>
                   </div>
                 </div>
