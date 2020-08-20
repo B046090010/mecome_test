@@ -125,7 +125,7 @@
         
         <div id="collapseArea" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <select id ="sarea" class="selectpicker form-control" data-live-search="true">
-            <option data-tokens="">-</option>
+            <option data-tokens="" selected><?php if ($_GET['area']!= NULL) echo $_GET['area']; else echo '-';?></option>
             <option data-tokens="">不分區</option>
             <option data-tokens="">三大區</option>
             <option data-tokens="">三重區</option>
