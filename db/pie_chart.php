@@ -31,10 +31,10 @@ else{
 }
 
 $query = 'SELECT '.$temp[0].' AS c,SUM("Total_Profit") 
-FROM "Sales_Total" as ST inner join 
-		"Dim_Product" as DP on ST."Product Key"=DP."Product Key" inner join
-		"Dim_Store" as DS on ST."Store Key"= DS."Store Key"
-WHERE ST."Sales Date Key" between '.$start.' AND '. $end.' 
+FROM "Sales_Total_Monthly" as STM left join 
+		"Dim_Product" as DP on STM."Product Key"=DP."Product Key" left join
+		"Dim_Store" as DS on STM."Store Key"= DS."Store Key"
+WHERE STM."Sales Date Key" between '.$start.' AND '. $end.' 
 and DP."Main Category" '.$main.' AND DP."Middle Category" '.$middle.' AND DP."Detail Category" '.$detail.' AND 
 DS."Area" '.$area.' AND DS."Country" '.$country.' AND DS."Town" '.$town.'
 GROUP BY '.$temp[1].'  
