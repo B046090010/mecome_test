@@ -18,9 +18,9 @@ if (($start/100%100)==1){
 else
 	$temp=$start-100;
 $query = 'SELECT "Sales Date Key"/100 as ym,SUM("Total_Profit") 
-FROM "Sales_Total" as ST inner join 
-		"Dim_Product" as DP on ST."Product Key"=DP."Product Key" inner join
-		"Dim_Store" as DS on ST."Store Key"= DS."Store Key" 
+FROM "Sales_Total_Monthly" as STM left join 
+		"Dim_Product" as DP on STM."Product Key"=DP."Product Key" left join
+		"Dim_Store" as DS on STM."Store Key"= DS."Store Key" 
 WHERE (("Sales Date Key" BETWEEN '.$temp.' AND '.$end.') OR ("Sales Date Key" BETWEEN '. ($start-10000).' AND '.($end-10000).')) 
 	AND DP."Main Category" '.$main.' AND DP."Middle Category" '.$middle.' AND DP."Detail Category" '.$detail.' AND 
 	DS."Area" '.$area.' AND DS."Country" '.$country.' AND DS."Town" '.$town.' 
