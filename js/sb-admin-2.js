@@ -54,6 +54,26 @@
   });
   //datepicker
   $("#datepicker,#datepickere").on('click', function(e) {
+    if ($(this).attr("id")=="datepicker"){
+      $(this).datepicker( {
+        format: 'yyyy-mm',
+        startDate:'2019-01',
+        endDate:'2020-07',
+        startView: "months", 
+        minViewMode: "months"
+      });
+    }
+    else{
+      var val=$("#datepicker").val();
+      $(this).datepicker( {
+        format: 'yyyy-mm',
+        startDate:val,
+        endDate:'2020-07',
+        startView: "months", 
+        minViewMode: "months"
+      });
+    }
+    
     $(this).datepicker('show');
   });
 
@@ -134,11 +154,12 @@
     var select;
     var temp=$( "#datepicker" ).val();
     var id=$(this).attr("id");
-    temp=temp.split("/");
-    start=parseInt(temp[2])*(10**4)+parseInt(temp[0])*(10**2)+parseInt(temp[1]);
+    temp=temp.replace("-","")+"01";
+    start=parseInt(temp);
+    //start=parseInt(temp[2])*(10**4)+parseInt(temp[0])*(10**2)+parseInt(temp[1]);
     temp=$( "#datepickere" ).val();
-    temp=temp.split("/");
-    end=parseInt(temp[2])*(10**4)+parseInt(temp[0])*(10**2)+parseInt(temp[1]);
+    temp=temp.replace("-","")+"99";
+    end=parseInt(temp);
     sarea=$("#sarea").val();
     scountry=$("#scountry").val();
     stown=$("#stown").val();
