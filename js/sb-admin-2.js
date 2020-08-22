@@ -54,26 +54,13 @@
   });
   //datepicker
   $("#datepicker,#datepickere").on('click', function(e) {
-    if ($(this).attr("id")=="datepicker"){
-      $(this).datepicker( {
-        format: 'yyyy-mm',
-        startDate:'2019-01',
-        endDate:'2020-07',
-        startView: "months", 
-        minViewMode: "months"
-      });
-    }
-    else{
-      var val=$("#datepicker").val();
-      $(this).datepicker( {
-        format: 'yyyy-mm',
-        startDate:val,
-        endDate:'2020-07',
-        startView: "months", 
-        minViewMode: "months"
-      });
-    }
-    
+    $(this).datepicker( {
+      format: 'yyyy-mm',
+      startDate:'2019-01',
+      endDate:'2020-07',
+      startView: "months", 
+      minViewMode: "months"
+    });
     $(this).datepicker('show');
   });
 

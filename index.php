@@ -26,6 +26,10 @@
       $group="Middle Category";
     else
       $group="Main Category";
+    $start=substr(substr_replace(strval($_SESSION['start']), '-', 4, 0),0,-2);
+    $end=substr(substr_replace(strval($_SESSION['end']), '-', 4, 0),0,-2);
+    $product=select_sidebar("product");
+    $store=select_sidebar("store");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,9 +108,9 @@
         </a>
 
         <div id="collapseStart" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <input type='text' class="form-control" id='datepicker' placeholder="start"/>
+            <?php echo "<input type='text' class='form-control' id='datepicker' value=".$start." />"?>
             <div class="span text-center text-white" >To</div>
-            <input type='text' class="form-control" id='datepickere' placeholder="end"/>
+            <?php echo "<input type='text' class='form-control' id='datepickere' value=".$end." />"?>
         </div>
       </li>
       <!-- Nav Item - store Collapse Menu -->
@@ -126,7 +130,7 @@
         
         <div id="collapseArea" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <select id ="sarea" class="selectpicker form-control" data-live-search="true">
-            <option data-tokens="" selected><?php if ($_GET['area']!= NULL) echo $_GET['area']; else echo '-';?></option>
+            <option data-tokens="" selected><?php remain ($_GET['area'])?></option>
             <option data-tokens="">不分區</option>
             <option data-tokens="">三大區</option>
             <option data-tokens="">三重區</option>
@@ -176,7 +180,7 @@
         </a>
         <div id="collapseCountry" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <select id ="scountry" class="selectpicker form-control" data-live-search="true">
-              <option data-tokens="">-</option>
+              <option data-tokens="" selected><?php remain ($_GET['country'])?></option>
               <option data-tokens="台">台北市</option>
               <option data-tokens="新">新北市</option>
               <option data-tokens="桃">桃園市</option>
@@ -202,18 +206,23 @@
         </a>
         <div id="collapseTown" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <select id ="stown" class="selectpicker form-control" data-live-search="true">
-              <option data-tokens="">-</option>   
-            </select>
+            <option data-tokens="" selected><?php remain ($_GET['town'])?></option>
+          </select>
         </div>
       </li>
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStorename" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fa fa-sitemap" aria-hidden="true"></i>
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
           <span>Store Name</span>
         </a>
         <div id="collapseStorename" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <select id ="sproduct" class="selectpicker form-control" data-live-search="true">
               <option data-tokens="">-</option>
+              <?php 
+                foreach($store as $value){
+                  echo '<option>'.$value['item'].'</option>';
+                }
+              ?>
             </select>
         </div>
       </li>
@@ -233,7 +242,7 @@
         </a>
         <div id="collapseMain" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <select id ="smain" class="selectpicker form-control" data-live-search="true">
-              <option data-tokens="">-</option>
+              <option data-tokens="" selected><?php remain ($_GET['main'])?></option>
               <option data-tokens="中">中藥</option>
               <option data-tokens="美">美清</option>
               <option data-tokens="婦">婦嬰</option>
@@ -252,11 +261,10 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMiddle" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fa fa-sitemap" aria-hidden="true"></i>
           <span>Middle</span>
-          
         </a>
         <div id="collapseMiddle" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <select id="smiddle" class="selectpicker form-control" data-live-search="true">
-            <option data-tokens="">-</option>
+            <option data-tokens="" selected><?php remain ($_GET['middle'])?></option>
           </select>
         </div>
       </li>
@@ -267,8 +275,7 @@
         </a>
         <div id="collapseDetail" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <select id ="sdetail" class="selectpicker form-control" data-live-search="true">
-              <option data-tokens="">-</option>
-              
+              <option data-tokens="" selected><?php remain ($_GET['detail'])?></option>
             </select>
         </div>
       </li>
@@ -280,6 +287,11 @@
         <div id="collapseProductname" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <select id ="sproduct" class="selectpicker form-control" data-live-search="true">
               <option data-tokens="">-</option>
+              <?php 
+                foreach($product as $value){
+                  echo '<option>'.$value['item'].'</option>';
+                }
+              ?>
             </select>
         </div>
       </li>
@@ -693,7 +705,7 @@
   <script src="vendor1/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
+  <script src="js/sb-admin-2.js"></script>
 
   <!-- Page level plugins -->
   <script src="vendor1/chart.js/Chart.min.js"></script>

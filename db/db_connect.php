@@ -36,10 +36,7 @@ function Total($start,$end,$main,$middle,$detail,$area,$country,$town){
 	   return $row;
 	}
 	else{
-	   
 	   return false;
-	   echo pg_last_error($db);
-	   exit;
 	}
 }
 function input($get){
@@ -115,7 +112,6 @@ function Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$
 
 	//query
 	$query=$temp_select.$from_where.' GROUP BY '.$group.' ORDER BY '.$order.$limit;
-	// echo $query;
 	//result
 	if($result = pg_query($db, $query)){
 	   $data= pg_fetch_all($result);
@@ -123,15 +119,32 @@ function Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$
 	}
 	else{
 		return false;
-	   //echo pg_last_error($db);
-	   //exit;
 	}
 	
  }
-function select_sidebar(){
+function select_sidebar($a){
 	global $db;
-	$query='SELECT DISTINCT ST."Product Key",DP."Product "
-			FROM "Sales_Total" AS ST LEFT JOIN "Dim_Product" AS DP ON ST."Product Key"=DP."Product Key"';
+	if ($a=='product'){
+		$item = '"Product Name Ch"';
+		$table = '"Dim_Product"';
+	}
+	else{
+		$item = '"Store Name"';
+		$table = '"Dim_Store"';
+	}
+	$query='SELECT '.$item.' AS item FROM '.$table;
+	if($result = pg_query($db, $query)){
+		$data= pg_fetch_all($result);
+		return $data;
+	}
+	else
+		return false;
+}
+function remain($a){
+	if ($a!= NULL) 
+		echo $a; 
+	else 
+		echo '-';
 }
 //'SELECT COUNT(*) FROM (SELECT DISTINCT LEFT("_SourceSales",25) FROM "Fact_Sales" WHERE "Date" Between $1 AND $2) AS temp'
 
