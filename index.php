@@ -28,8 +28,6 @@
       $group="Main Category";
     $start=substr(substr_replace(strval($_SESSION['start']), '-', 4, 0),0,-2);
     $end=substr(substr_replace(strval($_SESSION['end']), '-', 4, 0),0,-2);
-    $product=select_sidebar("product");
-    $store=select_sidebar("store");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -210,22 +208,6 @@
           </select>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStorename" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fa fa-map-marker" aria-hidden="true"></i>
-          <span>Store Name</span>
-        </a>
-        <div id="collapseStorename" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <select id ="sproduct" class="selectpicker form-control" data-live-search="true">
-              <option data-tokens="">-</option>
-              <?php 
-                foreach($store as $value){
-                  echo '<option>'.$value['item'].'</option>';
-                }
-              ?>
-            </select>
-        </div>
-      </li>
       <!-- Nav Item - product Collapse Menu -->
 
       <hr class="sidebar-divider">
@@ -276,22 +258,6 @@
         <div id="collapseDetail" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <select id ="sdetail" class="selectpicker form-control" data-live-search="true">
               <option data-tokens="" selected><?php remain ($_GET['detail'])?></option>
-            </select>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProductname" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fa fa-sitemap" aria-hidden="true"></i>
-          <span>Product Name</span>
-        </a>
-        <div id="collapseProductname" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <select id ="sproduct" class="selectpicker form-control" data-live-search="true">
-              <option data-tokens="">-</option>
-              <?php 
-                foreach($product as $value){
-                  echo '<option>'.$value['item'].'</option>';
-                }
-              ?>
             </select>
         </div>
       </li>
@@ -705,7 +671,7 @@
   <script src="vendor1/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.js"></script>
+  <script src="js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
   <script src="vendor1/chart.js/Chart.min.js"></script>
