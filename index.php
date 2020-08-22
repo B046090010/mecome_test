@@ -5,10 +5,11 @@
     if($_GET['start']!=NULL && ($_GET['end']!=NaN))
       $_SESSION['start']=$_GET["start"];
     else 
-      echo'<script>alert("Please select duration")</script>';
+      $_SESSION['start']=20200101;
     if($_GET['end']!=NULL && ($_GET['end']!=NaN))
       $_SESSION['end']=$_GET["end"];
-
+    else
+      $_SESSION['end']=20200601;
     $_SESSION['main']=input($_GET['main']);
     $_SESSION['middle']=input($_GET['middle']);
     $_SESSION['detail']=input($_GET['detail']);
@@ -205,6 +206,17 @@
             </select>
         </div>
       </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStorename" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fa fa-sitemap" aria-hidden="true"></i>
+          <span>Store Name</span>
+        </a>
+        <div id="collapseStorename" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <select id ="sproduct" class="selectpicker form-control" data-live-search="true">
+              <option data-tokens="">-</option>
+            </select>
+        </div>
+      </li>
       <!-- Nav Item - product Collapse Menu -->
 
       <hr class="sidebar-divider">
@@ -257,6 +269,17 @@
             <select id ="sdetail" class="selectpicker form-control" data-live-search="true">
               <option data-tokens="">-</option>
               
+            </select>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProductname" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fa fa-sitemap" aria-hidden="true"></i>
+          <span>Product Name</span>
+        </a>
+        <div id="collapseProductname" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <select id ="sproduct" class="selectpicker form-control" data-live-search="true">
+              <option data-tokens="">-</option>
             </select>
         </div>
       </li>

@@ -128,6 +128,11 @@ function Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$
 	}
 	
  }
+function select_sidebar(){
+	global $db;
+	$query='SELECT DISTINCT ST."Product Key",DP."Product "
+			FROM "Sales_Total" AS ST LEFT JOIN "Dim_Product" AS DP ON ST."Product Key"=DP."Product Key"';
+}
 //'SELECT COUNT(*) FROM (SELECT DISTINCT LEFT("_SourceSales",25) FROM "Fact_Sales" WHERE "Date" Between $1 AND $2) AS temp'
 
 //pg_close($db);
