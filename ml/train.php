@@ -7,7 +7,7 @@ include("/Users/guoshiqi/Desktop/phptest/Summer_Project/db/db_connect.php");
 
 
 
-use Phpml\Classification\KNearestNeighbors;;
+use Phpml\Regression\LeastSquares;
 
 function show($arr){
     foreach($arr AS $record){
@@ -20,7 +20,7 @@ function show($arr){
 
 $iv=array();
 $dv=array();
-$query='SELECT "Weekday","Year","Month","Day","Total_Profit"
+$query='SELECT "Total_Sales","Total_Profit","Total_Cost"
 From (
 	"Sales_Total" as ST left join 
 	"Dim_Date" as DD on  ST."Sales Date Key"=DD."Date Key" left join
@@ -28,7 +28,7 @@ From (
 	"Dim_Store" as DS on ST."Store Key"=DS."Store Key"
 ) AS temp
 Where random() <0.0001 
-Limit 10';
+Limit 100';
 
 if($result = pg_query($db, $query)){
     $rows = pg_fetch_all($result);
@@ -50,8 +50,7 @@ foreach($rows AS $record){
     array_push($iv,$temp);
     array_push($dv,$temp2);
 }
-//show($iv,$dv);
-$classifier = new KNearestNeighbors();
+$classifier = new LeastSquares();
 $classifier->train($iv, $dv);
-$classifier->predict([1,2020,6,8]);
+echo $classifier->predict([300,200]);
 ?>
