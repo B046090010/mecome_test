@@ -31,7 +31,7 @@ From (
 	"Dim_Store" as DS on ST."Store Key"=DS."Store Key"
 ) AS temp
 Where random() <0.0001 
-Limit 10';
+Limit 1';
 
 if($result = pg_query($db, $query)){
     $rows = pg_fetch_all($result);
@@ -53,11 +53,13 @@ foreach($rows AS $record){
     array_push($iv,$temp);
     array_push($dv,$temp2);
 }
-$regression = new LeastSquares();
-$regression->train($iv, $dv);
+
 $filepath = './model/temp';
 $modelManager = new ModelManager();
-$modelManager->saveToFile($regression, $filepath);
+$restoredClassifier = $modelManager->restoreFromFile($filepath);
+echo $restoredClassifier->predict([$iv[0][0],$iv[0][1]])."<p>";
+echo $dv[0][0]."<p>";
+
 
 
 
