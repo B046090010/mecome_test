@@ -1,15 +1,9 @@
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
-
-use Phpml\Classification\KNearestNeighbors;
-
-$samples = [[1, 3], [1, 4], [2, 4], [3, 1], [4, 1], [4, 2]];
-
-$labels = ['a', 'a', 'a', 'b', 'b', 'b'];
-
-$classifier = new KNearestNeighbors();
-$classifier->train($samples, $labels);
-
-echo $classifier->predict([3, 2]);
-// return 'b'
+if(isset($_GET['n'])) {
+    $n = $_GET['n'];
+  
+    // 以外部指令的方式呼叫 R 進行繪圖
+    exec("Rscript script.R $n");
+  
+}
 ?>
