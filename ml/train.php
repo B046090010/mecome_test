@@ -9,9 +9,13 @@ include("../db/db_connect.php");
 
 
 use Phpml\Regression\SVR;
-use Phpml\SupportVectorMachine\Kernel;
 use Phpml\ModelManager; 
-use Phpml\Association\Apriori;
+use Phpml\Regression\LeastSquares;
+use Phpml\FeatureSelection\VarianceThreshold;
+use Phpml\Dataset\ArrayDataset;
+
+
+
 
 
 
@@ -25,18 +29,20 @@ function show($arr){
 }
 
 $iv=array();
-$dv=[];
+$dv=array();
+$iv_row=array();
+$dv_row=array();
 
 
-$query='SELECT "Weekday","Month","Year","Is Weekend","Is Holiday","Main Category","Country","Total_Sales"
+$query='SELECT "Weekday","Month","Year","Is Weekend","Is Holiday","Country","Main Category","Total_Sales"
 From (
 	"Sales_Total" as ST left join 
-	"Dim_Date" as DD on  ST."Sales Date Key"=DD."Date Key" left join
-	"Dim_Product" as DP on ST."Product Key"=DP."Product Key" left join
-	"Dim_Store" as DS on ST."Store Key"=DS."Store Key"
+	"Dim_Date" as DD on  ST."Sales Date Key"=DD."Date Key" 
+    left join "Dim_Product" as DP on ST."Product Key"=DP."Product Key" 
+    left join "Dim_Store" as DS on ST."Store Key"=DS."Store Key"
 ) AS temp
-Where random() <0.0001 
-Limit 10';
+Where random() <0.001 
+Limit 1000';
 
 if($result = pg_query($db, $query)){
     $rows = pg_fetch_all($result);
@@ -44,22 +50,31 @@ if($result = pg_query($db, $query)){
 else{
     echo pg_last_error(db);
 }
-foreach($rows AS $record){
-    $temp=[];
-    foreach ($record AS $key=>$value){
-        array_push($temp,$value);
-    }
-    array_push($iv,$temp);
-    //array_push($dv,$temp2);
 
+
+foreach($rows AS $record){
+    $iv_row=[];
+    foreach ($record AS $key=>$value){
+        if ($key == "Is Weekend" || $key == "Is Holiday"){
+            if ($value == 'f') $value=0;
+            else $value=1;
+            array_push($iv_row,$value);
+        }
+        else{
+            $value=(int)$value;
+            if ($key == "Total_Sales"){
+                array_push($dv_row,$value);
+            }
+            else{
+                array_push($iv_row,$value);
+            }
+        }
+    }
+    array_push($iv,$iv_row);
+    array_push($dv,$dv_row);
 }
-show($iv);
-// $samples = [[60], [61], [62], [63], [65]];
-// $targets = [3.1, 3.6, 3.8, 4, 4.1];
-$associator = new Apriori($support = 0.5, $confidence = 0.5);
-$associator->train($iv, $dv);
-print_r($associator->getRules());
-print_r($associator->predict(['1','12','2019','f','f',"藥品","台北市"]));
+$row=[];
+
 
 
 
