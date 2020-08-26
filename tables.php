@@ -1,8 +1,21 @@
 <?php 
 include_once('db/db_connect.php');
 
-$start=$_GET['start'];
-$end=$_GET['end'];
+if($_GET['start']!=NULL && ($_GET['end']!=NaN))
+  $start=$_GET['start'];
+else 
+  $start=20200101;
+if($_GET['end']!=NULL && ($_GET['end']!=NaN))
+  $end=$_GET['end'];
+else
+  $end=20200610;
+$start=strval($start);
+$end=strval($end);
+
+$start=substr($start,0,4)."-".substr($start,4,2)."-".substr($start,6,2);
+$end=substr($end,0,4)."-".substr($end,4,2)."-".substr($end,6,2);
+
+
 $main=input($_GET['main']);
 $middle=input($_GET['middle']);
 $detail=input($_GET['detail']);
@@ -14,7 +27,7 @@ $group=$_GET['group'];
 $order=$_GET['order'];
 $limit=$_GET['limit'];
 
-$output=Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$group,$order,$limit);
+$output=Tables($_GET['start'],$_GET['end'],$main,$middle,$detail,$area,$country,$town,$select,$group,$order,$limit);
 
 
 ?>
@@ -79,6 +92,10 @@ $output=Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$g
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
           </a>
+          <a class="nav-link" href="tables.php">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Tables</span>
+          </a>
         </div>
       </li>
 
@@ -98,9 +115,9 @@ $output=Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$g
         </a>
 
         <div id="collapseStart" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <input type='text' class="form-control" id='datepicker' placeholder="start"/>
+            <?php echo "<input type='text' class='form-control' id='tableStart' value=".$start." />"?>
             <div class="span text-center text-white" >To</div>
-            <input type='text' class="form-control" id='datepickere' placeholder="end"/>
+            <?php echo "<input type='text' class='form-control' id='tableEnd' value=".$end." />"?>
         </div>
       </li>
       <!-- Nav Item - store Collapse Menu -->
@@ -120,6 +137,7 @@ $output=Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$g
         
         <div id="collapseArea" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <select id ="sarea" class="selectpicker form-control" data-live-search="true">
+            <option data-tokens="" selected><?php remain ($_GET['area'])?></option>
             <option data-tokens="">-</option>
             <option data-tokens="">不分區</option>
             <option data-tokens="">三大區</option>
@@ -170,7 +188,7 @@ $output=Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$g
         </a>
         <div id="collapseCountry" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <select id ="scountry" class="selectpicker form-control" data-live-search="true">
-              <option data-tokens="">-</option>
+              <option data-tokens="" selected><?php remain ($_GET['country'])?></option>
               <option data-tokens="台">台北市</option>
               <option data-tokens="新">新北市</option>
               <option data-tokens="桃">桃園市</option>
@@ -196,8 +214,8 @@ $output=Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$g
         </a>
         <div id="collapseTown" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <select id ="stown" class="selectpicker form-control" data-live-search="true">
-              <option data-tokens="">-</option>   
-            </select>
+            <option data-tokens="" selected><?php remain ($_GET['town'])?></option>
+          </select>
         </div>
       </li>
       <!-- Nav Item - product Collapse Menu -->
@@ -216,7 +234,7 @@ $output=Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$g
         </a>
         <div id="collapseMain" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <select id ="smain" class="selectpicker form-control" data-live-search="true">
-              <option data-tokens="">-</option>
+              <option data-tokens="" selected><?php remain ($_GET['main'])?></option>
               <option data-tokens="中">中藥</option>
               <option data-tokens="美">美清</option>
               <option data-tokens="婦">婦嬰</option>
@@ -239,7 +257,7 @@ $output=Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$g
         </a>
         <div id="collapseMiddle" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <select id="smiddle" class="selectpicker form-control" data-live-search="true">
-            <option data-tokens="">-</option>
+            <option data-tokens="" selected><?php remain ($_GET['middle'])?></option>
           </select>
         </div>
       </li>
@@ -250,8 +268,7 @@ $output=Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$g
         </a>
         <div id="collapseDetail" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <select id ="sdetail" class="selectpicker form-control" data-live-search="true">
-              <option data-tokens="">-</option>
-              
+              <option data-tokens="" selected><?php remain ($_GET['detail'])?></option>
             </select>
         </div>
       </li>

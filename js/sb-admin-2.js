@@ -56,11 +56,22 @@
   $("#datepicker,#datepickere").on('click', function(e) {
     $(this).datepicker( {
       format: 'yyyy-mm',
-      startDate:'2019-01',
+      startDate:'2020-01',
       endDate:'2020-07',
       startView: "months", 
       minViewMode: "months"
     });
+    $(this).datepicker('show');
+  });
+
+
+  $("#tableStart,#tableEnd").on('click', function(e) {
+    $(this).datepicker( {
+      format: 'yyyy-mm-dd',
+      startDate:'2020-01-01',
+      endDate:'2020-06-30'
+    });
+
     $(this).datepicker('show');
   });
 
@@ -139,14 +150,8 @@
   $("#send,#sendTable").on('click', function(e) {
     var start,end,sarea,scountry,stown,smain,smiddle,sdetail,group,order,limit;
     var select;
-    var temp=$( "#datepicker" ).val();
+    var temp;
     var id=$(this).attr("id");
-    temp=temp.replace("-","")+"01";
-    start=parseInt(temp);
-    //start=parseInt(temp[2])*(10**4)+parseInt(temp[0])*(10**2)+parseInt(temp[1]);
-    temp=$( "#datepickere" ).val();
-    temp=temp.replace("-","")+"99";
-    end=parseInt(temp);
     sarea=$("#sarea").val();
     scountry=$("#scountry").val();
     stown=$("#stown").val();
@@ -154,10 +159,24 @@
     smiddle=$("#smiddle").val();
     sdetail=$("#sdetail").val();
     if(id=="send"){
+      temp=$( "#datepicker" ).val();
+      temp=temp.replace("-","")+"01";
+      start=parseInt(temp);
+      //start=parseInt(temp[2])*(10**4)+parseInt(temp[0])*(10**2)+parseInt(temp[1]);
+      temp=$( "#datepickere" ).val();
+      temp=temp.replace("-","")+"99";
+      end=parseInt(temp);  
       document.location.href=
       "index.php?start="+start+"&end="+end+"&area="+sarea+"&country="+scountry+"&town="+stown+"&main="+smain+"&middle="+smiddle+"&detail="+sdetail;
     }
     else{
+      temp=$( "#tableStart" ).val();
+
+      temp=temp.replace(/-/g,"");
+      start=parseInt(temp);
+      temp=$( "#tableEnd" ).val();
+      temp=temp.replace(/-/g,"");
+      end=parseInt(temp);
       group=$("#group").val();
       order=$("#order").val();
       limit=$("#limit").val();

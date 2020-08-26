@@ -112,6 +112,7 @@ function Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$
 
 	//query
 	$query=$temp_select.$from_where.' GROUP BY '.$group.' ORDER BY '.$order.$limit;
+	//echo $query;
 	//result
 	if($result = pg_query($db, $query)){
 	   $data= pg_fetch_all($result);
