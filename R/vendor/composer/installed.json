@@ -1,0 +1,57 @@
+[
+    {
+        "name": "kachkaev/php-r",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kachkaev/php-r.git",
+            "reference": "d8daf7125a72b14b9eb7e17096a480156d682684"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kachkaev/php-r/zipball/d8daf7125a72b14b9eb7e17096a480156d682684",
+            "reference": "d8daf7125a72b14b9eb7e17096a480156d682684",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.9"
+        },
+        "time": "2017-12-08T10:23:22+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Kachkaev\\PHPR\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Alexander Kachkaev",
+                "email": "alexander@kachkaev.ru",
+                "homepage": "http://en.kachkaev.ru/"
+            },
+            {
+                "name": "Contributors",
+                "homepage": "https://github.com/kachkaev/php-r/contributors"
+            }
+        ],
+        "description": "Provides ability to run R scripts from PHP",
+        "homepage": "https://github.com/kachkaev/php-r",
+        "keywords": [
+            "Bridge",
+            "r",
+            "statistical analysis",
+            "stats"
+        ]
+    }
+]
