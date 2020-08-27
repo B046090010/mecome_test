@@ -129,6 +129,7 @@
         <div id="collapseArea" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <select id ="sarea" class="selectpicker form-control" data-live-search="true">
             <option data-tokens="" selected><?php remain ($_GET['area'])?></option>
+            <option data-tokens="">-</option>
             <option data-tokens="">不分區</option>
             <option data-tokens="">三大區</option>
             <option data-tokens="">三重區</option>
@@ -179,6 +180,7 @@
         <div id="collapseCountry" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <select id ="scountry" class="selectpicker form-control" data-live-search="true">
               <option data-tokens="" selected><?php remain ($_GET['country'])?></option>
+              <option data-tokens="">-</option>
               <option data-tokens="台">台北市</option>
               <option data-tokens="新">新北市</option>
               <option data-tokens="桃">桃園市</option>
@@ -225,6 +227,8 @@
         <div id="collapseMain" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <select id ="smain" class="selectpicker form-control" data-live-search="true">
               <option data-tokens="" selected><?php remain ($_GET['main'])?></option>
+              <option data-tokens="">-</option>
+
               <option data-tokens="中">中藥</option>
               <option data-tokens="美">美清</option>
               <option data-tokens="婦">婦嬰</option>
