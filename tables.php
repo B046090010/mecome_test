@@ -475,6 +475,7 @@ $output=Tables($_GET['start'],$_GET['end'],$main,$middle,$detail,$area,$country,
                             <option>Area</option>
                             <option>Country</option>
                             <option>Town</option>
+                            <option>Store Name</option>
                         </optgroup>
                         <optgroup label="Product">
                             <option>Main Category</option>

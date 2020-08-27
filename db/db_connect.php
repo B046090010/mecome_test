@@ -76,6 +76,10 @@ function Tables($start,$end,$main,$middle,$detail,$area,$country,$town,$select,$
 	   $group='DP."Product Key"';
 	   $temp_select='SELECT "Product Name Ch", ';
 	}
+	if ($group=="Store Name"){
+		$group='DS."Store Key"';
+		$temp_select='SELECT "Store Name", ';
+	 }
 	
 	//select
 	$select=explode(",", $select);
