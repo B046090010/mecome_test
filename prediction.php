@@ -1,33 +1,35 @@
 <?php 
-    include_once('db/db_connect.php');
-    session_start();
+include_once('db/db_connect.php');
 
-    if($_GET['start']!=NULL && ($_GET['end']!=NaN))
-      $_SESSION['start']=$_GET["start"];
-    else 
-      $_SESSION['start']=20200101;
-    if($_GET['end']!=NULL && ($_GET['end']!=NaN))
-      $_SESSION['end']=$_GET["end"];
-    else
-      $_SESSION['end']=20200601;
-    $_SESSION['main']=input($_GET['main']);
-    $_SESSION['middle']=input($_GET['middle']);
-    $_SESSION['detail']=input($_GET['detail']);
-    $_SESSION['area']=input($_GET['area']);
-    $_SESSION['country']=input($_GET['country']);       
-    $_SESSION['town']=input($_GET['town']);
-    $total=Total($_SESSION['start'],$_SESSION['end'],$_SESSION['main'],$_SESSION['middle'],$_SESSION['detail'],$_SESSION['area'],$_SESSION['country'],$_SESSION['town']);
-    $gross=($total['p']/$total['s'])*100;
-    if ($_SESSION['detail'] != 'IS NOT NULL')
-      $group="Product Name";
-    elseif ($_SESSION['middle'] != 'IS NOT NULL')
-      $group="Detail Category";
-    elseif ($_SESSION['main'] != 'IS NOT NULL')
-      $group="Middle Category";
-    else
-      $group="Main Category";
-    $start=substr(substr_replace(strval($_SESSION['start']), '-', 4, 0),0,-2);
-    $end=substr(substr_replace(strval($_SESSION['end']), '-', 4, 0),0,-2);
+if($_GET['start']!=NULL && ($_GET['end']!=NaN))
+  $start=$_GET['start'];
+else 
+  $start=20200101;
+if($_GET['end']!=NULL && ($_GET['end']!=NaN))
+  $end=$_GET['end'];
+else
+  $end=20200610;
+$start=strval($start);
+$end=strval($end);
+
+$start=substr($start,0,4)."-".substr($start,4,2)."-".substr($start,6,2);
+$end=substr($end,0,4)."-".substr($end,4,2)."-".substr($end,6,2);
+
+
+$main=input($_GET['main']);
+$middle=input($_GET['middle']);
+$detail=input($_GET['detail']);
+$area=input($_GET['area']);
+$country=input($_GET['country']);
+$town=input($_GET['town']);
+$select=$_GET['select'];
+$group=$_GET['group'];
+$order=$_GET['order'];
+$limit=$_GET['limit'];
+
+$output=Tables($_GET['start'],$_GET['end'],$main,$middle,$detail,$area,$country,$town,$select,$group,$order,$limit);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,17 +42,22 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Mecome - Dashboard</title>
+  <title>Mecome - Prediction</title>
 
-  <!-- Custom fonts for this template-->
+  <!-- Custom fonts for this template -->
   <link href="vendor1/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <!-- Custom styles for this template-->
+  <!-- Custom styles for this template -->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this page -->
+  <link href="vendor1/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <!-- other resource -->
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
 
 </head>
 
@@ -58,6 +65,8 @@
 
   <!-- Page Wrapper -->
   <div id="wrapper">
+
+    <!-- Sidebar -->
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -110,9 +119,9 @@
         </a>
 
         <div id="collapseStart" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <?php echo "<input type='text' class='form-control' id='datepicker' value=".$start." />"?>
+            <?php echo "<input type='text' class='form-control' id='tableStart' value=".$start." />"?>
             <div class="span text-center text-white" >To</div>
-            <?php echo "<input type='text' class='form-control' id='datepickere' value=".$end." />"?>
+            <?php echo "<input type='text' class='form-control' id='tableEnd' value=".$end." />"?>
         </div>
       </li>
       <!-- Nav Item - store Collapse Menu -->
@@ -184,7 +193,6 @@
         <div id="collapseCountry" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <select id ="scountry" class="selectpicker form-control" data-live-search="true">
               <option data-tokens="" selected><?php remain ($_GET['country'])?></option>
-              <option data-tokens="">-</option>
               <option data-tokens="台">台北市</option>
               <option data-tokens="新">新北市</option>
               <option data-tokens="桃">桃園市</option>
@@ -231,8 +239,6 @@
         <div id="collapseMain" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <select id ="smain" class="selectpicker form-control" data-live-search="true">
               <option data-tokens="" selected><?php remain ($_GET['main'])?></option>
-              <option data-tokens="">-</option>
-
               <option data-tokens="中">中藥</option>
               <option data-tokens="美">美清</option>
               <option data-tokens="婦">婦嬰</option>
@@ -251,6 +257,7 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMiddle" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fa fa-sitemap" aria-hidden="true"></i>
           <span>Middle</span>
+          
         </a>
         <div id="collapseMiddle" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <select id="smiddle" class="selectpicker form-control" data-live-search="true">
@@ -270,22 +277,15 @@
         </div>
       </li>
       <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
 
-      <!-- Search,Refresh -->
-      <button id="send" type="button" class="btn btn-icon-split" >
-        <span class="icon text-white-50">
-          <i class="fas fa-arrow-right"></i>
-        </span>
-      </button>
-      <p></p>
+      
 
     
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
-      <!-- Sidebar Toggler (Sidebar) -->
 
+      <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
       </div>
@@ -304,9 +304,11 @@
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
           <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-          </button>
+          <form class="form-inline">
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+              <i class="fa fa-bars"></i>
+            </button>
+          </form>
 
           <!-- Topbar Search -->
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -430,201 +432,21 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
-          <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-          </div>
-
-          <!-- Content Row -->
-          <div class="row">
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Sales (Total)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$<?php if ($total) echo number_format($total['s']);?></div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Profit (Total)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$<?php if ($total) echo number_format($total['p']);?></div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Gross margin</div>
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php if ($total) echo number_format($gross,2) ?>%</div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-7">
+                    <!-- Area Chart -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
                         </div>
-                        <div class="col">
-                          <div class="progress progress-sm mr-2">
-                            <?php echo'<div class="progress-bar bg-info" role="progressbar" style="width: '.$gross.'%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>'?>
-                          </div>
+                        <div class="card-body">
+                            <div class="chart-area">
+                                <canvas id="myAreaChart"></canvas>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                    <div class="col-auto">
-                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
                 </div>
-              </div>
             </div>
-
-            <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Quantity of Sales</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php if ($total) echo number_format($total['p']); ?></div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Content Row -->
-
-          <div class="row">
-
-            <!-- Bar Chart -->
-            <div class="col-xl-8 col-lg-7">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Profit Overview</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Other format</div>
-                      <?php
-                        echo'<a class="dropdown-item" href="tables.php?start='.$_SESSION['start'].'&end='.$_SESSION['end'].
-                        '&area='.$_GET['area']."&country=".$_GET['country']."&town=".$_GET['town'].
-                        "&main=".$_GET['main']."&middle=".$_GET['middle']."&detail=".$_GET['detail'].
-                        '&select=Profit&group=Month&order=Profit&limit=All rows" target="_blank">Shown in Table</a>';
-                      ?>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-bar">
-                    <canvas id="myBarChart"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Pie Chart -->
-            <div class="col-xl-4 col-lg-5">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Profit Sources Top 4</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Other format</div>
-                      <?php
-                        echo'<a class="dropdown-item" href="tables.php?start='.$_SESSION['start'].'&end='.$_SESSION['end'].
-                        '&area='.$_GET['area']."&country=".$_GET['country']."&town=".$_GET['town'].
-                        "&main=".$_GET['main']."&middle=".$_GET['middle']."&detail=".$_GET['detail'].
-                        '&select=Profit,Percentage(Profit)&group='.$group.'&order=Profit&limit=All rows" target="_blank">Shown in Table</a>';
-                      ?>
-                    </div>
-                  </div>
-                </div>
-                
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div id="chartjs-tooltip" 
-                    style="left: 0;bottom: 0;
-                      font-family:  Arial, sans-serif;
-                      font-style: normal;
-                      right: 0;
-                      display: flex;
-                      justify-content: center;
-                      position: absolute;
-                      z-index: 0;
-                      height: 90%;
-                      padding: 0;
-                      opacity: 1 !important;
-                      align-items: center;
-                      color: gray;
-                      font-size: 40px !important;
-                      font-weight: 800 !important;">
-                    <div><p>100%</p></div>
-                  </div>
-                  <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
-                    
-                  </div>
-                  <div class="mt-4 text-center small">
-                    <span class="mr-2" id="category-1">
-                      <!--<i class="fas fa-circle text-primary"></i> 藥-->
-                    </span>
-                    <span class="mr-2" id="category-2">
-                      <!--<i class="fas fa-circle text-success"></i> 保健品-->
-                    </span>
-                    <span class="mr-2" id="category-3">
-                      <!--<i class="fas fa-circle text-info"></i> 醫療器材-->
-                    </span>
-                    <span class="mr-2" id="category-4">
-                      <!--<i class="fas fa-circle text-warning"></i> 日用百貨-->
-                    </span>
-                    
-                    <span class="mr-2" id="category-6">
-                      <!--<i class="fas fa-circle text-secondary"></i> 其餘-->
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          </div>
-
-          <!-- Content Row -->
-
-
         </div>
         <!-- /.container-fluid -->
 
@@ -682,12 +504,15 @@
   <script src="js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="vendor1/chart.js/Chart.min.js"></script>
+  <script src="vendor1/datatables/jquery.dataTables.min.js"></script>
+  <script src="vendor1/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="js/demo/chart-pie-demo.js"></script>
-  <script src="js/demo/chart-bar-demo.js"></script>
-  <!-- Additional -->
+  <script src="vendor1/chart.js/Chart.min.js"></script>
+
+  <script src="js/demo/chart-area-demo.js"></script>
+
+  <!-- additional -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>

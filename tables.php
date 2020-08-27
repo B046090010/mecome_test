@@ -96,6 +96,10 @@ $output=Tables($_GET['start'],$_GET['end'],$main,$middle,$detail,$area,$country,
             <i class="fas fa-fw fa-table"></i>
             <span>Tables</span>
           </a>
+          <a class="nav-link" href="prediction.php">
+            <i class="fas fa-rocket" aria-hidden="true"></i>
+            <span>Prediction</span>
+          </a>
         </div>
       </li>
 
