@@ -52,7 +52,9 @@ $output=Tables($_GET['start'],$_GET['end'],$main,$middle,$detail,$area,$country,
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
   <!-- Custom styles for this page -->
-  <link href="vendor1/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="https://cdn.anychart.com/playground-css/seat-map/seat-map-title.css" type="text/css" rel="stylesheet">
+  <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+  <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
   <!-- other resource -->
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
@@ -431,21 +433,21 @@ $output=Tables($_GET['start'],$_GET['end'],$main,$middle,$detail,$area,$country,
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-8 col-lg-7">
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">SeatMap</h6>
-                        </div>
-                        <div class="card-body">
-                            <div id="seatmap">
-                               
-                            </div>
-                        </div>
+        <div class="container-fluid" >
+          <div class="row" >
+            <div class="col-xl-12 col-lg-7" >
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">SeatMap</h6>
+                  </div>
+                  <div class="card-body">
+                    <div id="container" style="height: 90vh;">
+                            
                     </div>
+                  </div>
                 </div>
             </div>
+          </div>
         </div>
         <!-- /.container-fluid -->
 
@@ -503,11 +505,15 @@ $output=Tables($_GET['start'],$_GET['end'],$main,$middle,$detail,$area,$country,
   <script src="js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-map.min.js"></script>
+  <script src="https://cdn.anychart.com/text-data/sport_mall_data.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/themes/light_blue.min.js"></script>
 
   <!-- Page level custom scripts -->
-
-
+  <script src="js/demo/seat-map-demo.js"></script>
   <!-- additional -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
