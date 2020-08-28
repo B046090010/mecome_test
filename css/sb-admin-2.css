@@ -11221,3 +11221,21 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+#chartjs-tooltip {
+  left: 0;bottom: 0;
+  font-family:  Arial, sans-serif;
+  font-style: normal;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  z-index: 0;
+  height: 90%;
+  padding: 0;
+  opacity: 1 !important;
+  align-items: center;
+  color: gray;
+  font-size: 40px !important;
+  font-weight: 800 !important;
+}

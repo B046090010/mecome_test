@@ -439,7 +439,7 @@ $output=Tables($_GET['start'],$_GET['end'],$main,$middle,$detail,$area,$country,
                             <h6 class="m-0 font-weight-bold text-primary">SeatMap</h6>
                         </div>
                         <div class="card-body">
-                            <div class="chart-area">
+                            <div id="seatmap">
                                
                             </div>
                         </div>
