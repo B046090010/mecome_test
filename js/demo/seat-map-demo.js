@@ -8,14 +8,14 @@ anychart.onDocumentReady(function () {
     // The data that have been used for this sample can be taken from the CDN
     // https://cdn.anychart.com/svg-data/seat-map/sport-mall.svg
     // https://cdn.anychart.com/text-data/sport_mall_text.js
-    $('#container').append(
-        '<div class="seat-map-title">' +
-        '<h1>Sport Mall</h1>' +
-        '<p>Source <a href="https://cdn.anychart.com/svg-data/' +
-        'seat-map/sport-mall.svg"' +
-        'target="_blank">SVG Image</a></p></div>'
-    );
-
+    // $('#container').append(
+    //     '<div class="seat-map-title">' +
+    //     '<h1>Sport Mall</h1>' +
+    //     '<p>Source <a href="https://cdn.anychart.com/svg-data/' +
+    //     'seat-map/sport-mall.svg"' +
+    //     'target="_blank">SVG Image</a></p></div>'
+    // );
+    
     // set svg file
     $.ajax({
         type: 'GET',
