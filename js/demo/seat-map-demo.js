@@ -19,7 +19,7 @@ anychart.onDocumentReady(function () {
     // set svg file
     $.ajax({
         type: 'GET',
-        url: 'https://cdn.anychart.com/svg-data/seat-map/sport-mall.svg',
+        url: './svg/sport-mall.svg',//https://cdn.anychart.com/svg-data/seat-map/sport-mall.svg
         // The data that have been used for this sample can be taken from the CDN
         // load SVG image using jQuery ajax
         success: function (svgData) {
