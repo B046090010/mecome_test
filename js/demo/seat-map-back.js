@@ -19,16 +19,16 @@ anychart.onDocumentReady(function () {
     // set svg file
     $.ajax({
         type: 'GET',
-        url: './svg/temp.svg',//https://cdn.anychart.com/svg-data/seat-map/sport-mall.svg
+        url: './svg/sport-mall.svg',//https://cdn.anychart.com/svg-data/seat-map/sport-mall.svg
         // The data that have been used for this sample can be taken from the CDN
         // load SVG image using jQuery ajax
         success: function (svgData) {
             // data for creating a SeatMap
             var chart = anychart.seatMap([
-                { id: 'a1', value: 'A1' },
-                { id: 'a2', value: 'A2' },
-                { id: 'a3', value: 'A3' },
-                { id: 'a4', value: 'A4' }
+                { id: 'nike', value: 'Nike' },
+                { id: 'adidas', value: 'Adidas' },
+                { id: 'puma', value: 'Puma' },
+                { id: 'reebok', value: 'Reebok' }
             ]);
             // set svg data
             chart.geoData(svgData);
@@ -51,10 +51,10 @@ anychart.onDocumentReady(function () {
             // set color scale.
             series.colorScale(
                 anychart.scales.ordinalColor([
-                { equal: 'A1', color: 'rgb(127, 210, 235)' },
-                { equal: 'A2', color: 'rgb(111, 193, 117)' },
-                { equal: 'A3', color: 'rgb(242, 203, 117)' },
-                { equal: 'A4', color: 'rgb(188, 139, 191)' }
+                { equal: 'Nike', color: 'rgb(127, 210, 235)' },
+                { equal: 'Adidas', color: 'rgb(111, 193, 117)' },
+                { equal: 'Puma', color: 'rgb(242, 203, 117)' },
+                { equal: 'Reebok', color: 'rgb(188, 139, 191)' }
                 ])
             );
 
@@ -72,25 +72,25 @@ anychart.onDocumentReady(function () {
                 var openTime = {};
 
                 switch (this.regionProperties.id) {
-                case 'a1':
+                case 'nike':
                     openTime = {
                     workingTime: '9AM-8PM',
                     workingTime24Format: '9-20'
                     };
                     break;
-                case 'a2':
+                case 'adidas':
                     openTime = {
                     workingTime: '12AM-9PM',
                     workingTime24Format: '12-21'
                     };
                     break;
-                case 'a3':
+                case 'puma':
                     openTime = {
                     workingTime: '10AM-9PM',
                     workingTime24Format: '10-21'
                     };
                     break;
-                case 'a4':
+                case 'reebok':
                     openTime = {
                     workingTime: '8AM-4PM',
                     workingTime24Format: '8-16'
@@ -115,13 +115,13 @@ anychart.onDocumentReady(function () {
                 var textCompany = aboutCompany(); 
 
                 switch (this.regionProperties.id) {
-                case 'a1':
+                case 'nike':
                     return textCompany.nike;
-                case 'a2':
+                case 'adidas':
                     return textCompany.adidas;
-                case 'a3':
+                case 'puma':
                     return textCompany.puma;
-                case 'a4':
+                case 'reebok':
                     return textCompany.reebok;
                 default:
                 }
@@ -142,13 +142,13 @@ function returnColor() {
         var itemClass = attrs.class;
         console.log(itemClass);
         switch (itemClass) {
-        case 'a1':
+        case 'nike':
             return 'rgb(127, 210, 235)';
-        case 'a2':
+        case 'adidas':
             return 'rgb(111, 193, 117)';
-        case 'a3':
+        case 'puma':
             return 'rgb(242, 203, 117)';
-        case 'a4':
+        case 'reebok':
             return 'rgb(188, 139, 191)';
         case 'nike-logo':
         case 'adidas-logo':
@@ -169,10 +169,10 @@ function returnColorHoverAndSelect() {
         // attr in svg.file
         var itemClass = attrs.class;
         switch (itemClass) {
-        case 'a1':
-        case 'a2':
-        case 'a3':
-        case 'a4':
+        case 'nike':
+        case 'adidas':
+        case 'puma':
+        case 'reebok':
             return anychart.color.lighten(this.sourceColor, 0.25);
         case 'nike-logo':
         case 'adidas-logo':
