@@ -1,21 +1,28 @@
+var perctenage={
+    "a1":50,
+    "a2":30,
+    "a3":10,
+    "a4":10
+};
+// var Librarydata;
 
+// function callback(response) {
+//     Librarydata = response;
+// }
+
+// $.ajax({
+//     url:"db/pie_chart.php",
+//     type : "GET",
+//     dataType : "json",
+//     async: false,
+//     success : callback
+// })
 
 anychart.onDocumentReady(function () {
 	// set chart theme
     anychart.theme('lightBlue');
     var stage = document.getElementById("seatmap");
-
-    // The data that have been used for this sample can be taken from the CDN
-    // https://cdn.anychart.com/svg-data/seat-map/sport-mall.svg
-    // https://cdn.anychart.com/text-data/sport_mall_text.js
-    // $('#container').append(
-    //     '<div class="seat-map-title">' +
-    //     '<h1>Sport Mall</h1>' +
-    //     '<p>Source <a href="https://cdn.anychart.com/svg-data/' +
-    //     'seat-map/sport-mall.svg"' +
-    //     'target="_blank">SVG Image</a></p></div>'
-    // );
-
+    // console.log(Librarydata);
     // set svg file
     $.ajax({
         type: 'GET',
@@ -114,10 +121,10 @@ anychart.onDocumentReady(function () {
             });
             // Create chart tooltip own text
             series.tooltip().format(function () {
-                var textCompany = aboutCompany(); 
+                var textCompany = LayerSales(); 
                 switch (this.regionProperties.id) {
                 case 'a1':
-                    return textCompany.nike;
+                    return textCompany.a1;
                 case 'a2':
                     return textCompany.adidas;
                 case 'a3':
@@ -138,12 +145,7 @@ anychart.onDocumentReady(function () {
 
 function returnColor() {
     var attrs = this.attributes;
-    var perctenage={
-        "a1":50,
-        "a2":30,
-        "a3":10,
-        "a4":10
-    };
+    
 
     if (attrs) {
         var itemClass = attrs.class;
@@ -223,5 +225,13 @@ function isOpen(date) {
         return 'close';
     }
     return 'close';
+}
+function  LayerSales(){
+    return {
+        a1: 'Layer 1 : \n 中藥：（30,000 元，27個）；酒精：（27,000 元，14個）\n Layer 2：\n 藥水：（21,000 元，43 個）',
+        puma: 'To be the fastest sports brand in the world',
+        adidas: 'We strive to be the best sports company in the world, \n with brands built on a passion \n for sports and a sporting lifestyle!',
+        reebok: 'Retail location for the brand\'s own athletic shoes, \n apparel, backpacks and other accessories.'
+    }
 }
                 

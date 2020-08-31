@@ -509,7 +509,6 @@ $output=Tables($_GET['start'],$_GET['end'],$main,$middle,$detail,$area,$country,
   <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
   <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
   <script src="https://cdn.anychart.com/releases/v8/js/anychart-map.min.js"></script>
-  <script src="https://cdn.anychart.com/text-data/sport_mall_data.js"></script>
   <script src="https://cdn.anychart.com/releases/v8/themes/light_blue.min.js"></script>
 
   <!-- Page level custom scripts -->
