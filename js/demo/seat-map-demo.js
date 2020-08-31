@@ -3,7 +3,7 @@
 anychart.onDocumentReady(function () {
 	// set chart theme
     anychart.theme('lightBlue');
-    var stage = acgraph.create('container');
+    var stage = document.getElementById("seatmap");
 
     // The data that have been used for this sample can be taken from the CDN
     // https://cdn.anychart.com/svg-data/seat-map/sport-mall.svg
@@ -51,10 +51,10 @@ anychart.onDocumentReady(function () {
             // set color scale.
             series.colorScale(
                 anychart.scales.ordinalColor([
-                { equal: 'A1', color: 'rgb(127, 210, 235)' },
-                { equal: 'A2', color: 'rgb(111, 193, 117)' },
-                { equal: 'A3', color: 'rgb(242, 203, 117)' },
-                { equal: 'A4', color: 'rgb(188, 139, 191)' }
+                { equal: '50~100', color: 'rgb(127, 210, 235)' },
+                { equal: '30~49', color: 'rgb(111, 193, 117)' },
+                { equal: '10~29', color: 'rgb(242, 203, 117)' },
+                { equal: '0~9', color: 'rgb(188, 139, 191)' }
                 ])
             );
 
@@ -113,7 +113,6 @@ anychart.onDocumentReady(function () {
             // Create chart tooltip own text
             series.tooltip().format(function () {
                 var textCompany = aboutCompany(); 
-
                 switch (this.regionProperties.id) {
                 case 'a1':
                     return textCompany.nike;
@@ -137,30 +136,51 @@ anychart.onDocumentReady(function () {
 
 function returnColor() {
     var attrs = this.attributes;
+    console.log(attrs);
+    var perctenage={
+        "a1":50,
+        "a2":30,
+        "a3":10,
+        "a4":10
+    };
+
     if (attrs) {
-        // attr in svg.file
         var itemClass = attrs.class;
-        console.log(itemClass);
-        switch (itemClass) {
-        case 'a1':
+        console.log(perctenage[itemClass]);
+        if (perctenage[itemClass]>=50)
             return 'rgb(127, 210, 235)';
-        case 'a2':
+        else if (perctenage[itemClass]>=30)
             return 'rgb(111, 193, 117)';
-        case 'a3':
+        else if (perctenage[itemClass]>=10)
             return 'rgb(242, 203, 117)';
-        case 'a4':
+        else if (perctenage[itemClass]>=0)
             return 'rgb(188, 139, 191)';
-        case 'nike-logo':
-        case 'adidas-logo':
-        case 'puma-logo':
-        case 'reebok-logo':
-            return '#606061';
-        default:
+        else
             return this.sourceColor;
-        // it returns the original color for
-        // those elements that are not fill/stroke over
-        }
     }
+    // if (attrs) {
+    //     // attr in svg.file
+    //     var itemClass = attrs.class;
+    //     switch (itemClass) {
+    //     case 'a1':
+    //         return 'rgb(127, 210, 235)';
+    //     case 'a2':
+    //         return 'rgb(111, 193, 117)';
+    //     case 'a3':
+    //         return 'rgb(242, 203, 117)';
+    //     case 'a4':
+    //         return 'rgb(188, 139, 191)';
+    //     case 'nike-logo':
+    //     case 'adidas-logo':
+    //     case 'puma-logo':
+    //     case 'reebok-logo':
+    //         return '#606061';
+    //     default:
+    //         return this.sourceColor;
+    //     // it returns the original color for
+    //     // those elements that are not fill/stroke over
+    //     }
+    // }
 }
 
 function returnColorHoverAndSelect() {
