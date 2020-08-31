@@ -59,7 +59,7 @@ anychart.onDocumentReady(function () {
             );
 
             // sets stroke/fill series
-            series.stroke(returnColor);
+            series.stroke('rgb(56, 52, 56)');
             series.fill(returnColor);
 
             // sets fill on hover series and select series
@@ -102,10 +102,12 @@ anychart.onDocumentReady(function () {
                 var state = isOpen(openTime.workingTime24Format);
 
                 return (
+                '<h1 style="color: black;">'+
                 this.value +
                 ' - ' +
                 state +
-                '<br><span style="font-size: 10px;">' +
+                '</h1>'+
+                '<br><span style="font-size: 10px;color: black;">' +
                 openTime.workingTime +
                 '</span>'
                 );
@@ -136,7 +138,6 @@ anychart.onDocumentReady(function () {
 
 function returnColor() {
     var attrs = this.attributes;
-    console.log(attrs);
     var perctenage={
         "a1":50,
         "a2":30,
@@ -146,7 +147,6 @@ function returnColor() {
 
     if (attrs) {
         var itemClass = attrs.class;
-        console.log(perctenage[itemClass]);
         if (perctenage[itemClass]>=50)
             return 'rgb(127, 210, 235)';
         else if (perctenage[itemClass]>=30)
