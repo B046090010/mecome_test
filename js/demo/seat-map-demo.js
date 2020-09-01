@@ -15,6 +15,7 @@ function callback(response) {
 $.ajax({
     url:"db/seat_map.php",
     type : "GET",
+    data:{start:$("#datepicker").val(),end:$("#datepickere").val(),main:$("#smain").val(),middle:$("#smiddle").val(),detail:$("#sdetail").val(),store:$("#sstore").val()},
     dataType : "json",
     async: false,
     success : callback
@@ -94,18 +95,6 @@ anychart.onDocumentReady(function () {
                     }
                     return temp;
                 }
-                // var textCompany = LayerSales(); 
-                // switch (this.regionProperties.id) {
-                // case 'a':
-                //     return textCompany.a;
-                // case 'b':
-                //     return textCompany.b;
-                // case 'c':
-                //     return textCompany.c;
-                // case 'd':
-                //     return textCompany.d;
-                // default:
-                // }
             });
 
             // set container id for the chart
@@ -198,12 +187,4 @@ function isOpen(date) {
         return 'close';
     }
     return 'close';
-}
-function  LayerSales(){
-    return {
-        a: 'Layer 1 : \n 中藥：（30,000 元，27個）；酒精：（27,000 元，14個）\n Layer 2：\n 藥水：（21,000 元，43 個）',
-        b: 'To be the fastest sports brand in the world',
-        c: 'We strive to be the best sports company in the world, \n with brands built on a passion \n for sports and a sporting lifestyle!',
-        d: 'Retail location for the brand\'s own athletic shoes, \n apparel, backpacks and other accessories.'
-    }
-}          
+}        

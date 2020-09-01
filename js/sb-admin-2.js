@@ -158,18 +158,7 @@
     smain=$("#smain").val();
     smiddle=$("#smiddle").val();
     sdetail=$("#sdetail").val();
-    if(id=="send"){
-      temp=$( "#datepicker" ).val();
-      temp=temp.replace("-","")+"01";
-      start=parseInt(temp);
-      //start=parseInt(temp[2])*(10**4)+parseInt(temp[0])*(10**2)+parseInt(temp[1]);
-      temp=$( "#datepickere" ).val();
-      temp=temp.replace("-","")+"99";
-      end=parseInt(temp);  
-      document.location.href=
-      "index.php?start="+start+"&end="+end+"&area="+sarea+"&country="+scountry+"&town="+stown+"&main="+smain+"&middle="+smiddle+"&detail="+sdetail;
-    }
-    else{
+    if(id=="sendTable"){
       temp=$( "#tableStart" ).val();
 
       temp=temp.replace(/-/g,"");
@@ -186,6 +175,29 @@
       "&main="+smain+"&middle="+smiddle+"&detail="+sdetail+
       "&select="+select+"&group="+group+"&order="+order+"&limit="+limit;
     }
+    else{
+      temp=$( "#datepicker" ).val();
+      temp=temp.replace("-","")+"01";
+      start=parseInt(temp);
+      //start=parseInt(temp[2])*(10**4)+parseInt(temp[0])*(10**2)+parseInt(temp[1]);
+      temp=$( "#datepickere" ).val();
+      temp=temp.replace("-","")+"99";
+      end=parseInt(temp);  
+      document.location.href=
+      "index.php?start="+start+"&end="+end+"&area="+sarea+"&country="+scountry+"&town="+stown+"&main="+smain+"&middle="+smiddle+"&detail="+sdetail;
+    }
+  });
+  $("#sendSeat").on('click',function(e){
+    var start,end,sstore,smain,smiddle,sdetail;
+    sstore=($("#sstore").val()).match(/\d+/);
+    if (sstore ==null) sstore='-';
+    smain=$("#smain").val();
+    smiddle=$("#smiddle").val();
+    sdetail=$("#sdetail").val();
+    start=$( "#datepicker" ).val();
+    end=$( "#datepickere" ).val();
+    document.location.href=
+      "seatmap.php?start="+start+"&end="+end+"&store="+sstore+"&main="+smain+"&middle="+smiddle+"&detail="+sdetail;
   });
 
 })(jQuery); // End of use strict

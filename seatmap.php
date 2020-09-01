@@ -4,27 +4,17 @@ include_once('db/db_connect.php');
 if($_GET['start']!=NULL && ($_GET['end']!=NaN))
   $start=$_GET['start'];
 else 
-  $start=20200101;
+  $start="2020-06";
 if($_GET['end']!=NULL && ($_GET['end']!=NaN))
   $end=$_GET['end'];
 else
-  $end=20200610;
+  $end="2020-06";
 $start=strval($start);
 $end=strval($end);
-
-$start=substr($start,0,4)."-".substr($start,4,2)."-".substr($start,6,2);
-$end=substr($end,0,4)."-".substr($end,4,2)."-".substr($end,6,2);
-
-
-$main=input($_GET['main']);
-$middle=input($_GET['middle']);
-$detail=input($_GET['detail']);
-$area=input($_GET['area']);
-$country=input($_GET['country']);
-$town=input($_GET['town']);
-
-$start=substr(substr_replace(strval($_SESSION['start']), '-', 4, 0),0,-2);
-$end=substr(substr_replace(strval($_SESSION['end']), '-', 4, 0),0,-2);
+$main=$_GET['main'];
+$middle=$_GET['middle'];
+$detail=$_GET['detail'];
+$store=$_GET['store'];
 
 ?>
 <!DOCTYPE html>
@@ -117,9 +107,9 @@ $end=substr(substr_replace(strval($_SESSION['end']), '-', 4, 0),0,-2);
         </a>
 
         <div id="collapseStart" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <?php echo "<input type='text' class='form-control' id='tableStart' value=".$start." />"?>
+            <?php echo "<input type='text' class='form-control' id='datepicker' value=".$start." />"?>
             <div class="span text-center text-white" >To</div>
-            <?php echo "<input type='text' class='form-control' id='tableEnd' value=".$end." />"?>
+            <?php echo "<input type='text' class='form-control' id='datepickere' value=".$end." />"?>
         </div>
       </li>
       <!-- Nav Item - store Collapse Menu -->
@@ -137,21 +127,10 @@ $end=substr(substr_replace(strval($_SESSION['end']), '-', 4, 0),0,-2);
           <span>Store</span>
         </a>
         <div id="collapseStore" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <select id ="sstore" class="selectpicker form-control" data-live-search="true">
-              <option>台北市</option>
-              <option data-tokens="新">新北市</option>
-              <option data-tokens="桃">桃園市</option>
-              <option data-tokens="新">新竹市</option>
-              <option data-tokens="新">新竹縣</option>
-              <option data-tokens="苗">苗栗縣</option>
-              <option data-tokens="台">台中市</option>
-              <option data-tokens="彰">彰化縣</option>
-              <option data-tokens="南">南投縣</option>
-              <option data-tokens="雲">雲林市</option>
-              <option data-tokens="嘉">嘉義市</option>
-              <option data-tokens="台">台南市</option>
-              <option data-tokens="高">高雄市</option>
-              <option data-tokens="屏">屏東縣</option>
+          <select id ="sstore" class="selectpicker form-control" >
+              <option selected><?php remain ($_GET['store'])?></option>
+              <option>美康中壢店(382)</option>
+              <option>明月店(149)</option>
             </select>
         </div>
       </li>
@@ -210,7 +189,14 @@ $end=substr(substr_replace(strval($_SESSION['end']), '-', 4, 0),0,-2);
         </div>
       </li>
       <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
 
+      <button id="sendSeat" type="button" class="btn btn-icon-split" >
+        <span class="icon text-white-50">
+          <i class="fas fa-arrow-right"></i>
+        </span>
+      </button>
+      <p></p>
       
 
     
