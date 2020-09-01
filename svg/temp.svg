@@ -8,67 +8,67 @@
     <path d="M 0 520 L 320 520" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/>
     <path d="M 440 520 L 520 520" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/>
 
-    <g id="a1">
-        <rect class="a1" x="65" y="70" width="195" height="60" fill="none" stroke="#000000" pointer-events="all"/>
+    <g id="a">
+        <rect class="a" x="65" y="70" width="195" height="60" fill="none" stroke="#000000" pointer-events="all"/>
         <g transform="translate(-0.5 -0.5)">
             <switch>
                 <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
                     <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 193px; height: 1px; padding-top: 100px; margin-left: 66px;">
                         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
-                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">A1</div>
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">A</div>
                         </div>
                     </div>
                 </foreignObject>
-                <text x="163" y="104" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">A1</text>
+                <text x="163" y="104" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">A</text>
             </switch>
         </g>
     </g>
     
 
-    <g id="a2">
-        <rect class="a2" x="260" y="70" width="190" height="60" fill="none" stroke="#000000" pointer-events="all"/>
+    <g id="b">
+        <rect class="b" x="260" y="70" width="190" height="60" fill="none" stroke="#000000" pointer-events="all"/>
         <g transform="translate(-0.5 -0.5)">
             <switch>
                 <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
                     <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 188px; height: 1px; padding-top: 100px; margin-left: 261px;">
                         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
-                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">A2</div>
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">B</div>
                         </div>
                     </div>
                 </foreignObject>
-                <text x="355" y="104" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">A2</text>
+                <text x="355" y="104" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">B</text>
             </switch>
         </g>
     </g>
 
-    <g  id="a3">
-        <rect class="a3" x="65" y="130" width="195" height="60" fill="none" stroke="#000000" pointer-events="all"/>
+    <g  id="c">
+        <rect class="c" x="65" y="130" width="195" height="60" fill="none" stroke="#000000" pointer-events="all"/>
         <g transform="translate(-0.5 -0.5)">
             <switch>
                 <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
                     <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 193px; height: 1px; padding-top: 160px; margin-left: 66px;">
                         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
-                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">A3</div>
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">C</div>
                         </div>
                     </div>
                 </foreignObject>
-                <text x="163" y="164" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">A3</text>
+                <text x="163" y="164" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">C</text>
             </switch>
         </g>
     </g>
 
-    <g id="a4">
-        <rect class="a4" x="260" y="130" width="190" height="60" fill="none" stroke="#000000" pointer-events="all"/>
+    <g id="d">
+        <rect class="d" x="260" y="130" width="190" height="60" fill="none" stroke="#000000" pointer-events="all"/>
         <g transform="translate(-0.5 -0.5)">
             <switch>
                 <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
                     <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 188px; height: 1px; padding-top: 160px; margin-left: 261px;">
                         <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
-                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">A4</div>
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">D</div>
                         </div>
                     </div>
                 </foreignObject>
-                <text x="355" y="164" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">A4</text>
+                <text x="355" y="164" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">D</text>
             </switch>
         </g>
     </g>

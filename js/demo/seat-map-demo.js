@@ -1,28 +1,29 @@
-var perctenage={
-    "a1":50,
-    "a2":30,
-    "a3":10,
-    "a4":10
-};
-// var Librarydata;
+var perctenage={};
+var sales={};
+function callback(response) {
+    for(var i in response[0]){
+        perctenage[response[0][i]['Location']]=(response[0][i]['Sales(%)']*100).toFixed(2);
+        sales[response[0][i]['Location']]={1:[],2:[],3:[],4:[],5:[],6:[],7:[]}
+    }
+    for (var i in response[1]){
+        temp=response[1][i]['Name']+"($"+response[1][i]['Sales']+")";
+        sales[response[1][i]['Location']][response[1][i]['Layer']].push(temp);
+    }
+    delete temp;
+}
 
-// function callback(response) {
-//     Librarydata = response;
-// }
-
-// $.ajax({
-//     url:"db/pie_chart.php",
-//     type : "GET",
-//     dataType : "json",
-//     async: false,
-//     success : callback
-// })
+$.ajax({
+    url:"db/seat_map.php",
+    type : "GET",
+    dataType : "json",
+    async: false,
+    success : callback
+})
 
 anychart.onDocumentReady(function () {
 	// set chart theme
     anychart.theme('lightBlue');
     var stage = document.getElementById("seatmap");
-    // console.log(Librarydata);
     // set svg file
     $.ajax({
         type: 'GET',
@@ -32,10 +33,10 @@ anychart.onDocumentReady(function () {
         success: function (svgData) {
             // data for creating a SeatMap
             var chart = anychart.seatMap([
-                { id: 'a1', value: 'A1' },
-                { id: 'a2', value: 'A2' },
-                { id: 'a3', value: 'A3' },
-                { id: 'a4', value: 'A4' }
+                { id: 'a', value: 'A' },
+                { id: 'b', value: 'B' },
+                { id: 'c', value: 'C' },
+                { id: 'd', value: 'D' }
             ]);
             // set svg data
             chart.geoData(svgData);
@@ -58,10 +59,10 @@ anychart.onDocumentReady(function () {
             // set color scale.
             series.colorScale(
                 anychart.scales.ordinalColor([
-                { equal: '50~100', color: 'rgb(127, 210, 235)' },
-                { equal: '30~49', color: 'rgb(111, 193, 117)' },
-                { equal: '10~29', color: 'rgb(242, 203, 117)' },
-                { equal: '0~9', color: 'rgb(188, 139, 191)' }
+                { equal: '50~100%', color: 'rgb(127, 210, 235)' },
+                { equal: '30~49%', color: 'rgb(111, 193, 117)' },
+                { equal: '10~29%', color: 'rgb(242, 203, 117)' },
+                { equal: '0~9%', color: 'rgb(188, 139, 191)' }
                 ])
             );
 
@@ -76,63 +77,35 @@ anychart.onDocumentReady(function () {
             // Create chart tooltip own title
             series.tooltip().title().useHtml(true);
             series.tooltip().titleFormat(function () {
-                var openTime = {};
-
-                switch (this.regionProperties.id) {
-                case 'a1':
-                    openTime = {
-                    workingTime: '9AM-8PM',
-                    workingTime24Format: '9-20'
-                    };
-                    break;
-                case 'a2':
-                    openTime = {
-                    workingTime: '12AM-9PM',
-                    workingTime24Format: '12-21'
-                    };
-                    break;
-                case 'a3':
-                    openTime = {
-                    workingTime: '10AM-9PM',
-                    workingTime24Format: '10-21'
-                    };
-                    break;
-                case 'a4':
-                    openTime = {
-                    workingTime: '8AM-4PM',
-                    workingTime24Format: '8-16'
-                    };
-                    break;
-                default:
-                }
-
-                var state = isOpen(openTime.workingTime24Format);
-
                 return (
-                '<h1 style="color: black;">'+
-                this.value +
-                ' - ' +
-                state +
-                '</h1>'+
-                '<br><span style="font-size: 10px;color: black;">' +
-                openTime.workingTime +
-                '</span>'
+                    '<h1 style="color: black;">'+
+                    this.value +'\t('+perctenage[this.regionProperties.id]+
+                    ')%</h1>'
                 );
             });
             // Create chart tooltip own text
             series.tooltip().format(function () {
-                var textCompany = LayerSales(); 
-                switch (this.regionProperties.id) {
-                case 'a1':
-                    return textCompany.a1;
-                case 'a2':
-                    return textCompany.adidas;
-                case 'a3':
-                    return textCompany.puma;
-                case 'a4':
-                    return textCompany.reebok;
-                default:
+                if (sales[this.regionProperties.id]!=null){
+                    temp="";
+                    for (var i in sales[this.regionProperties.id]){
+                        if (sales[this.regionProperties.id][i].length>0){
+                            temp+="Layer "+i+":\n"+sales[this.regionProperties.id][i].join("\n")+"\n";
+                        }
+                    }
+                    return temp;
                 }
+                // var textCompany = LayerSales(); 
+                // switch (this.regionProperties.id) {
+                // case 'a':
+                //     return textCompany.a;
+                // case 'b':
+                //     return textCompany.b;
+                // case 'c':
+                //     return textCompany.c;
+                // case 'd':
+                //     return textCompany.d;
+                // default:
+                // }
             });
 
             // set container id for the chart
@@ -191,10 +164,10 @@ function returnColorHoverAndSelect() {
         // attr in svg.file
         var itemClass = attrs.class;
         switch (itemClass) {
-        case 'a1':
-        case 'a2':
-        case 'a3':
-        case 'a4':
+        case 'a':
+        case 'b':
+        case 'c':
+        case 'd':
             return anychart.color.lighten(this.sourceColor, 0.25);
         case 'nike-logo':
         case 'adidas-logo':
@@ -228,10 +201,9 @@ function isOpen(date) {
 }
 function  LayerSales(){
     return {
-        a1: 'Layer 1 : \n 中藥：（30,000 元，27個）；酒精：（27,000 元，14個）\n Layer 2：\n 藥水：（21,000 元，43 個）',
-        puma: 'To be the fastest sports brand in the world',
-        adidas: 'We strive to be the best sports company in the world, \n with brands built on a passion \n for sports and a sporting lifestyle!',
-        reebok: 'Retail location for the brand\'s own athletic shoes, \n apparel, backpacks and other accessories.'
+        a: 'Layer 1 : \n 中藥：（30,000 元，27個）；酒精：（27,000 元，14個）\n Layer 2：\n 藥水：（21,000 元，43 個）',
+        b: 'To be the fastest sports brand in the world',
+        c: 'We strive to be the best sports company in the world, \n with brands built on a passion \n for sports and a sporting lifestyle!',
+        d: 'Retail location for the brand\'s own athletic shoes, \n apparel, backpacks and other accessories.'
     }
-}
-                
+}          

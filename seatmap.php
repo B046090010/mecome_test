@@ -22,13 +22,9 @@ $detail=input($_GET['detail']);
 $area=input($_GET['area']);
 $country=input($_GET['country']);
 $town=input($_GET['town']);
-$select=$_GET['select'];
-$group=$_GET['group'];
-$order=$_GET['order'];
-$limit=$_GET['limit'];
 
-$output=Tables($_GET['start'],$_GET['end'],$main,$middle,$detail,$area,$country,$town,$select,$group,$order,$limit);
-
+$start=substr(substr_replace(strval($_SESSION['start']), '-', 4, 0),0,-2);
+$end=substr(substr_replace(strval($_SESSION['end']), '-', 4, 0),0,-2);
 
 ?>
 <!DOCTYPE html>
@@ -136,66 +132,13 @@ $output=Tables($_GET['start'],$_GET['end'],$main,$middle,$detail,$area,$country,
       </div>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseArea" aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStore" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fa fa-map-marker" aria-hidden="true"></i>
-          <span>Area</span>
+          <span>Store</span>
         </a>
-        
-        <div id="collapseArea" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <select id ="sarea" class="selectpicker form-control" data-live-search="true">
-            <option data-tokens="" selected><?php remain ($_GET['area'])?></option>
-            <option data-tokens="">-</option>
-            <option data-tokens="">不分區</option>
-            <option data-tokens="">三大區</option>
-            <option data-tokens="">三重區</option>
-            <option data-tokens="">中和區</option>
-            <option data-tokens="">中壢區</option>
-            <option data-tokens="">二安區</option>
-            <option data-tokens="">佳恩區</option>
-            <option data-tokens="">利民區</option>
-            <option data-tokens="">加棟區</option>
-            <option data-tokens="">南雅區</option>
-            <option data-tokens="">台安區</option>
-            <option data-tokens="">台灣區</option>
-            <option data-tokens="">善耕區</option>
-            <option data-tokens="">城康區</option>
-            <option data-tokens="">大慶區</option>
-            <option data-tokens="">家音區</option>
-            <option data-tokens="">富國區</option>
-            <option data-tokens="">延吉區</option>
-            <option data-tokens="">悅康區</option>
-            <option data-tokens="">新康區</option>
-            <option data-tokens="">新杏區</option>
-            <option data-tokens="">新竹區</option>
-            <option data-tokens="">林口區</option>
-            <option data-tokens="">桃園區</option>
-            <option data-tokens="">桃康區</option>
-            <option data-tokens="">正康區</option>
-            <option data-tokens="">蘆洲區</option>
-            <option data-tokens="">逢甲區</option>
-            <option data-tokens="">閎安區</option>
-            <option data-tokens="">鶯康區</option>
-            <option data-tokens="">一安一區</option>
-            <option data-tokens="">一安二區</option>
-            <option data-tokens="">北市二區</option>
-            <option data-tokens="">新莊一區</option>
-            <option data-tokens="">新莊二區</option>
-            <option data-tokens="">一安政昇區</option>
-            <option data-tokens="">輔大美康區</option>
-            <option data-tokens="">N/A</option>
-          </select>
-        </div>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCountry" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fa fa-map-marker" aria-hidden="true"></i>
-          <span>Country</span>
-        </a>
-        <div id="collapseCountry" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <select id ="scountry" class="selectpicker form-control" data-live-search="true">
-              <option data-tokens="" selected><?php remain ($_GET['country'])?></option>
-              <option data-tokens="台">台北市</option>
+        <div id="collapseStore" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <select id ="sstore" class="selectpicker form-control" data-live-search="true">
+              <option>台北市</option>
               <option data-tokens="新">新北市</option>
               <option data-tokens="桃">桃園市</option>
               <option data-tokens="新">新竹市</option>
@@ -210,18 +153,6 @@ $output=Tables($_GET['start'],$_GET['end'],$main,$middle,$detail,$area,$country,
               <option data-tokens="高">高雄市</option>
               <option data-tokens="屏">屏東縣</option>
             </select>
-        </div>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTown" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fa fa-map-marker" aria-hidden="true"></i>
-          <span>Town</span>
-        </a>
-        <div id="collapseTown" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <select id ="stown" class="selectpicker form-control" data-live-search="true">
-            <option data-tokens="" selected><?php remain ($_GET['town'])?></option>
-          </select>
         </div>
       </li>
       <!-- Nav Item - product Collapse Menu -->

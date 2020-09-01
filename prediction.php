@@ -22,12 +22,7 @@ $detail=input($_GET['detail']);
 $area=input($_GET['area']);
 $country=input($_GET['country']);
 $town=input($_GET['town']);
-$select=$_GET['select'];
-$group=$_GET['group'];
-$order=$_GET['order'];
-$limit=$_GET['limit'];
 
-$output=Tables($_GET['start'],$_GET['end'],$main,$middle,$detail,$area,$country,$town,$select,$group,$order,$limit);
 
 
 ?>
