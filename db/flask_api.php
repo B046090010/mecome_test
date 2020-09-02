@@ -58,7 +58,15 @@
 
 
    $url="https://forecastesales.herokuapp.com/sendjson2/";
-   print_r(http_post_data($url, $data));
+   // $url="http://127.0.0.1:5000/sendjson2/";
+
+   $output=http_post_data($url, $data);
+   if($output[0]==200){
+      echo $output[1];
+   }
+   else{
+      echo "fail";
+   }
 
 
    

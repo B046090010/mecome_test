@@ -439,7 +439,7 @@ $town=input($_GET['town']);
                             <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
                         </div>
                         <div class="card-body">
-                            <div class="chart-area">
+                            <div class="chart-area" style="height:60vh">
                                 <canvas id="myAreaChart"></canvas>
                             </div>
                         </div>
