@@ -32,7 +32,6 @@ function get_data(){
   $.get("db/flask_api.php",function (data){
     year_month=Object.keys(data);
     sales=Object.values(data);
-    console.log(year_month+"\n"+sales);
     var ctx = document.getElementById("myAreaChart");
     var myLineChart = new Chart(ctx, {
       type: 'line',
