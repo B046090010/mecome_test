@@ -88,6 +88,10 @@ $store=$_GET['store'];
             <i class="fas fa-rocket" aria-hidden="true"></i>
             <span>Prediction</span>
           </a>
+          <a class="nav-link" href="seatmap.php">
+            <i class="fa fa-map-pin" aria-hidden="true"></i>
+            <span>Seatmap</span>
+          </a>
         </div>
       </li>
 
