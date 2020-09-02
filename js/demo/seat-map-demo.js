@@ -25,10 +25,13 @@ anychart.onDocumentReady(function () {
 	// set chart theme
     anychart.theme('lightBlue');
     var stage = document.getElementById("seatmap");
+    var c_store=($("#sstore").val());
+    if (c_store == "-" )
+        c_store= '149';
     // set svg file
     $.ajax({
         type: 'GET',
-        url: './svg/temp.svg',//https://cdn.anychart.com/svg-data/seat-map/sport-mall.svg
+        url: './svg/'+c_store+'.svg',//https://cdn.anychart.com/svg-data/seat-map/sport-mall.svg
         // The data that have been used for this sample can be taken from the CDN
         // load SVG image using jQuery ajax
         success: function (svgData) {
