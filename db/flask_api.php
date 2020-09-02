@@ -1,13 +1,7 @@
 <?php
-   $host        = "host=127.0.0.1";
-   $port        = "port=5432";
-   $dbname      = "dbname=test";
-   $credentials = "user=postgres password=asshole425012";
+   header('Content-Type: application/json; charset=utf-8');
+   require_once("db_connect.php");
 
-   $db = pg_connect( "$host $port $dbname $credentials");
-   if(!$db){
-      echo "Error : Unable to open database\n";
-   }
    $query='SELECT DD."Date" as ds, SUM("Total_Sales") as y
    FROM "Sales_Total" as ST left join "Dim_Date" as DD on ST."Sales Date Key" = DD."Date Key"
    GROUP BY ds';
