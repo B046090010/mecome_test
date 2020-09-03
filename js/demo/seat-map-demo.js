@@ -63,10 +63,13 @@ anychart.onDocumentReady(function () {
             // set color scale.
             series.colorScale(
                 anychart.scales.ordinalColor([
-                { equal: '50~100%', color: 'rgb(127, 210, 235)' },
-                { equal: '30~49%', color: 'rgb(111, 193, 117)' },
-                { equal: '10~29%', color: 'rgb(242, 203, 117)' },
-                { equal: '0~9%', color: 'rgb(188, 139, 191)' }
+                { equal: '50~100%', color: 'rgb(96,236,8)' },
+                { equal: '40~49%', color: 'rgb(95,163,52)' },
+                { equal: '30~39%', color: 'rgb(194,225,28)' },
+                { equal: '20~29%', color: 'rgb(221,223,11)' },
+                { equal: '10~19%', color: 'rgb(236,145,95)' },
+                { equal: '0~9%', color: 'rgb(240,26,26)' }
+
                 ])
             );
 
@@ -115,13 +118,17 @@ function returnColor() {
     if (attrs) {
         var itemClass = attrs.class;
         if (perctenage[itemClass]>=50)
-            return 'rgb(127, 210, 235)';
+            return 'rgb(96,236,8)';
+        else if (perctenage[itemClass]>=40)
+            return 'rgb(95,163,52)';
         else if (perctenage[itemClass]>=30)
-            return 'rgb(111, 193, 117)';
+            return 'rgb(194,225,28)';
+        else if (perctenage[itemClass]>=20)
+            return 'rgb(221,223,11)';
         else if (perctenage[itemClass]>=10)
-            return 'rgb(242, 203, 117)';
+            return 'rgb(236,145,95)';
         else if (perctenage[itemClass]>=0)
-            return 'rgb(188, 139, 191)';
+            return 'rgb(240,26,26)';
         else
             return this.sourceColor;
     }
@@ -173,21 +180,3 @@ function returnColorHoverAndSelect() {
         }
     }
 }
-
-    // function return state open or close.
-function isOpen(date) {
-    var d = new Date(); // for now
-    var min = 60;
-    var currentTime = d.getHours() * min + d.getMinutes();
-    // if it is not Sunday
-    if (d.getDay() !== 0) {
-        if (
-        currentTime >= date.split('-')[0] * min &&
-        currentTime <= date.split('-')[1] * min
-        ) {
-            return 'open';
-        }
-        return 'close';
-    }
-    return 'close';
-}        
