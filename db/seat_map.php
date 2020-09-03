@@ -53,7 +53,7 @@ From (
 	FROM "Sales_Total_Monthly" as STM LEFT JOIN "Dim_Product" AS DP on STM."Product Key"=DP."Product Key"
 	WHERE "Sales Date Key" BETWEEN '.$start.' AND '.$end.' AND STM."Store Key"= '.$store.$opt.' 
 	GROUP BY STM."Product Key","Store Key"
-	HAVING SUM("Total_Sales") > 500
+	HAVING SUM("Total_Sales") > 700
 ) as temp 
 	left join "Seat_Map" as SM  on ((temp."Store Key"=SM."Store Key") and (temp."Product Key"=SM."Product Key")) 
 	left join "Dim_Store" as DS on temp."Store Key"=DS."Store Key" 

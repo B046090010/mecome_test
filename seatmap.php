@@ -155,6 +155,7 @@ $store=$_GET['store'];
         <div id="collapseMain" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <select id ="smain" class="selectpicker form-control" data-live-search="true">
               <option data-tokens="" selected><?php remain ($_GET['main'])?></option>
+              <option>-</option>
               <option data-tokens="中">中藥</option>
               <option data-tokens="美">美清</option>
               <option data-tokens="婦">婦嬰</option>
