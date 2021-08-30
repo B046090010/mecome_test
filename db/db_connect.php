@@ -1,16 +1,12 @@
 <?php
 
-// heroku
-// $host        = "host=ec2-54-146-91-153.compute-1.amazonaws.com";
-// $port        = "port=5432";
-// $dbname      = "dbname=dfvs1vb27tqpk4";
-// $credentials = "user=veavfoyrlcezql password=ea8b2403bb00b5e20d4444b871f6b5ad991ef9c4be6f714b20112782536102ba";
+
 
 //localhost
 $host        = "host=127.0.0.1";
 $port        = "port=5432";
 $dbname      = "dbname=test";
-$credentials = "user=postgres password=asshole425012";
+$credentials = "";
 
 $db = pg_connect( "$host $port $dbname $credentials"  );
 if(!$db){
